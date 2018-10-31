@@ -10,8 +10,14 @@ namespace Entities
         public string Username { get; set; }
         public string Password { get; set; }
         public DateTime? ConnectedSince => Sessions.Find(session => session.Active)?.ConnectedSince;
-        public int ConnectionsCount => Sessions.Count;
-        private List<Session> Sessions { get; }
+        public int ConnectionsCount {
+            get
+            {
+                return Sessions.Count;
+            }
+            set { }
+        }
+        public List<Session> Sessions { get; set; }
 
         public Client(string username, string password)
         {

@@ -51,5 +51,34 @@ namespace UI
             }
             return Input.SelectMenuOption("Choose an option", 1, options.Count);
         }
+
+        public static int CRUDClientMenu()
+        {
+            Console.WriteLine("+----------------------------+");
+            Console.WriteLine("|        CRUD CLIENT         |");
+            Console.WriteLine("+----------------------------+");
+            List<string> options = new List<string>(new[]
+            {
+                "Create",
+                "Update",
+                "Delete",
+                "Exit"
+            });
+            for (var i = 0; i < options.Count; i++)
+            {
+                Console.WriteLine(i + 1 + " - " + options[i]);
+            }
+            return Input.SelectMenuOption("Choose an option", 1, options.Count);
+        }
+
+        public static int MapExistingClients(List<string> options)
+        {
+            for (var i = 0; i < options.Count; i++)
+            {
+                Console.WriteLine(i + 1 + " - " + options[i]);
+            }
+            return Input.SelectMenuOption("Choose an option", 1, options.Count);
+        }
+
     }
 }

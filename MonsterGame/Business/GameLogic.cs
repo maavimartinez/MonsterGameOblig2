@@ -13,6 +13,7 @@ namespace Business
         private Server Server { get; set; }
         private ActionLogic ActionLogic { get; set; }
         private PlayerLogic PlayerLogic { get; set; }
+        private CRUDClientLogic ClientLogic { get; set; }
         private string ActiveGameResult { get; set; }
         private Game activeGame { get; set; }
         private Board board { get; set; }
@@ -24,6 +25,22 @@ namespace Business
             Server = new Server();
             ActionLogic = new ActionLogic(Store);
             PlayerLogic = new PlayerLogic(Store);
+            ClientLogic = new CRUDClientLogic(Store);
+        }
+
+        public bool CreateClient(Client client)
+        {
+            return ClientLogic.CreateClient(client);
+        }
+
+        public bool UpdateClient(Client oldClient, Client newClient)
+        {
+            return ClientLogic.UpdateClient(oldClient, newClient);
+        }
+
+        public bool DeleteClient(Client client)
+        {
+            return ClientLogic.DeleteClient(client);
         }
 
         public string Login(Client client)

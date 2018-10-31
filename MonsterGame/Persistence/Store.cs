@@ -12,6 +12,13 @@ namespace Persistence
         public Game ActiveGame { get; set; }
         public Board Board { get; set; }
 
+        private readonly object messagesLocker = new object();
+        private readonly object loginLocker = new object();
+        private readonly object friendshipLocker = new object();
+        private readonly object logLocker = new object();
+
+        //PONER TODOS LOS LOCKERS
+
         public Store()
         {
             Clients = new List<Client>();
@@ -88,5 +95,48 @@ namespace Persistence
             this.AllPlayers = allPlayers;
         }
 
+        public void DeleteClient(Client client)
+        {
+            lock (loginLocker)
+            {
+                Clients.Remove(client);
+            }
+        }
+
+        public void ConnectClient(Client client, Session session)
+        {
+            lock (loginLocker)
+            {
+                Client storedClient = GetClient(client.Username);
+                storedClient.ConnectionsCount++;
+                storedClient.AddSession(session);
+            }
+        }
+
+        public bool IsClientConnected(Client client)
+        {
+            Client storedClient = Clients.Find(c => c.Equals(client));
+            return storedClient != null && storedClient.Sessions.Exists(session => session.Active);
+        }
+
+        public void DisconnectClient(string token)
+        {
+            lock (loginLocker)
+            {
+                Client storedClient = Clients.Find(c => c.Sessions.Exists(s => s.Id.Equals(token)));
+                storedClient.Sessions = new List<Session>();
+            }
+        }
+
+        public void UpdateClient(Client existingClient, Client newClient)
+        {
+            lock (loginLocker)
+            {
+                Client storedClient = GetClient(existingClient.Username);
+
+                storedClient.Username = newClient.Username;
+                storedClient.Password = newClient.Password;
+            }
+        }
     }
 }
