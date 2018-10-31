@@ -9,7 +9,7 @@ using Protocol;
 using UI;
 using System.Runtime.InteropServices;
 
-namespace Server
+namespace GameServer
 {
 
     class Program
@@ -91,7 +91,7 @@ namespace Server
 
         private static bool GameIsOff(GameLogic controller)
         {
-            return controller.Store.ActiveGame == null || !controller.Store.ActiveGame.isOn;
+            return controller.Store.GetGame() == null || !controller.Store.GetGame().isOn;
         }
 
         private static void CloseServer(ServerProtocol server, GameLogic gameLogic)

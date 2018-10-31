@@ -1,0 +1,16 @@
+C:\Users\Ernesto\Desktop\REPOSITORIO2\MonsterGameOblig2\MonsterGame\Server\obj\Debug\GameServer.csprojResolveAssemblyReference.cache
+C:\Users\Ernesto\Desktop\REPOSITORIO2\MonsterGameOblig2\MonsterGame\Server\obj\Debug\Server.exe
+C:\Users\Ernesto\Desktop\REPOSITORIO2\MonsterGameOblig2\MonsterGame\Server\obj\Debug\Server.pdb
+C:\Users\Ernesto\Desktop\REPOSITORIO2\MonsterGameOblig2\MonsterGame\Server\bin\Debug\Server.exe.config
+C:\Users\Ernesto\Desktop\REPOSITORIO2\MonsterGameOblig2\MonsterGame\Server\bin\Debug\Server.exe
+C:\Users\Ernesto\Desktop\REPOSITORIO2\MonsterGameOblig2\MonsterGame\Server\bin\Debug\Server.pdb
+C:\Users\Ernesto\Desktop\REPOSITORIO2\MonsterGameOblig2\MonsterGame\Server\bin\Debug\Business.dll
+C:\Users\Ernesto\Desktop\REPOSITORIO2\MonsterGameOblig2\MonsterGame\Server\bin\Debug\Entities.cs.dll
+C:\Users\Ernesto\Desktop\REPOSITORIO2\MonsterGameOblig2\MonsterGame\Server\bin\Debug\Persistence.dll
+C:\Users\Ernesto\Desktop\REPOSITORIO2\MonsterGameOblig2\MonsterGame\Server\bin\Debug\Protocol.dll
+C:\Users\Ernesto\Desktop\REPOSITORIO2\MonsterGameOblig2\MonsterGame\Server\bin\Debug\UI.dll
+C:\Users\Ernesto\Desktop\REPOSITORIO2\MonsterGameOblig2\MonsterGame\Server\bin\Debug\Business.pdb
+C:\Users\Ernesto\Desktop\REPOSITORIO2\MonsterGameOblig2\MonsterGame\Server\bin\Debug\Entities.cs.pdb
+C:\Users\Ernesto\Desktop\REPOSITORIO2\MonsterGameOblig2\MonsterGame\Server\bin\Debug\Persistence.pdb
+C:\Users\Ernesto\Desktop\REPOSITORIO2\MonsterGameOblig2\MonsterGame\Server\bin\Debug\Protocol.pdb
+C:\Users\Ernesto\Desktop\REPOSITORIO2\MonsterGameOblig2\MonsterGame\Server\bin\Debug\UI.pdb

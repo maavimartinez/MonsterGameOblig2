@@ -1,7 +1,7 @@
 ﻿using System;
 using Protocol;
 
-namespace Server
+namespace GameServer
 {
     public class Router
     {

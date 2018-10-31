@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using Entities;
+using Business;
 
 namespace Persistence
 {
-    public class Store
+    public class Store : MarshalByRefObject, IStore
     {
         private List<Client> Clients { get; set; }
-
         public List<Player> AllPlayers { get; set; }
-
         public Game ActiveGame { get; set; }
-
         public Board Board { get; set; }
 
         public Store()
@@ -45,9 +43,34 @@ namespace Persistence
             return AllPlayers.Find(p => p.Client.Username.Equals(clientUsername));
         }
 
-        public Game StartGame()
+        public Game GetGame()
         {
-            throw new NotImplementedException();
+            return ActiveGame;
+        }
+
+        public void SetGame(Game game)
+        {
+            this.ActiveGame = ActiveGame;
+        }
+
+        public Board GetBoard()
+        {
+            return Board;
+        }
+
+        public void SetBoard(Board board)
+        {
+            this.Board = board;
+        }
+
+        public List<Player> GetAllPlayers()
+        {
+            return this.AllPlayers;
+        }
+
+        public void SetAllPlayers(List<Player> allPlayers)
+        {
+            this.AllPlayers = allPlayers;
         }
 
     }

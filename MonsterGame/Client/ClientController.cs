@@ -9,7 +9,7 @@ using System.Drawing;
 using System.IO;
 
 
-namespace Client
+namespace GameClient
 {
     public class ClientController
     {

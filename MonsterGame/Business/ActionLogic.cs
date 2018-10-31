@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Business.Exceptions;
 using Entities;
-using Persistence;
-
 
 namespace Business
 {
@@ -17,9 +15,12 @@ namespace Business
         const int WIDTH = 8;
         const int HEIGHT = 8;
 
-        private Store Store { get; set; }
+        private IStore Store { get; set; }
+        private Game activeGame { get; set; }
+        private Board board { get; set; }
+        private List<Player> allPlayers { get; set; }
 
-        public ActionLogic(Store store)
+        public ActionLogic(IStore store)
         {
             Store = store;
         }
@@ -39,6 +40,7 @@ namespace Business
       
         public List<string> GetNearPlayers(int x, int y)
         {
+            board = Store.GetBoard();
             List<string> nearPlayers = new List<string>();
             nearPlayers.Add("NEAR");
 
@@ -50,10 +52,10 @@ namespace Business
             {
                 for (int j = lowerY; j <= upperY; ++j)
                 {
-                    if (Store.Board.Cells[i, j].Player != null && (i != x || j != y))
+                    if (board.Cells[i, j].Player != null && (i != x || j != y))
                     {
-                        string nearUsername = Store.Board.Cells[i, j].Player.Client.Username;
-                        string role = Store.Board.Cells[i, j].Player.ToString();
+                        string nearUsername = board.Cells[i, j].Player.Client.Username;
+                        string role = board.Cells[i, j].Player.ToString();
 
                         nearPlayers.Add(nearUsername + "(" + role + ")");
                     }
@@ -79,7 +81,7 @@ namespace Business
 
         public Player GetDefender(string username)
         {
-            foreach (Player pl in Store.ActiveGame.Players)
+            foreach (Player pl in Store.GetGame().Players)
             {
                 if (pl.Client.Username.Equals(username, StringComparison.OrdinalIgnoreCase))
                 {
@@ -108,7 +110,7 @@ namespace Business
         private int GetMinTurn()
         {
             int min = Int32.MaxValue;
-            foreach (Player pl in Store.ActiveGame.Players)
+            foreach (Player pl in Store.GetGame().Players)
             {
                 if (pl.NumOfActions < min) min = pl.NumOfActions;
             }
@@ -175,20 +177,24 @@ namespace Business
 
         private void CheckFreePosition(int x, int y)
         {
-            if (Store.Board.Cells[x, y].Player != null) throw new CellAlreadyContainsAPlayerException();
+            if (Store.GetBoard().Cells[x, y].Player != null) throw new CellAlreadyContainsAPlayerException();
         }
 
         private void LocatePlayerOnCell(Player player, int x, int y)
         {
-            player.Position = Store.Board.Cells[x, y];
-            Store.Board.Cells[x, y].Player = player;
+            board = Store.GetBoard();
+            player.Position = board.Cells[x, y];
+            board.Cells[x, y].Player = player;
+            Store.SetBoard(board);
         }
 
         private void RemovePlayerFromCell(Player player)
         {
+            board = Store.GetBoard();
             int x = player.Position.X;
             int y = player.Position.Y;
-            Store.Board.Cells[x, y].Player = null;
+            board.Cells[x, y].Player = null;
+            Store.SetBoard(board);
         }
 
         private List<string> Attack(Player attacker, Player defender)

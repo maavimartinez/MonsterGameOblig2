@@ -3,7 +3,7 @@ using System.Net.Sockets;
 using System.Runtime.InteropServices;
 
 
-namespace Client
+namespace GameClient
 {
     class Program
     {

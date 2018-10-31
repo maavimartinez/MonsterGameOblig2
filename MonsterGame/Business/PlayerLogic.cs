@@ -2,16 +2,19 @@
 using System.Linq;
 using Business.Exceptions;
 using Entities;
-using Persistence;
+using System.Collections.Generic;
 
 namespace Business
 {
     public class PlayerLogic
     {
 
-        private Store Store { get; set; }
+        private IStore Store { get; set; }
+        private Game activeGame { get; set; }
+        private Board board { get; set; }
+        private List<Player> allPlayers { get; set; }
 
-        public PlayerLogic(Store store)
+        public PlayerLogic(IStore store)
         {
             Store = store;
         }
@@ -29,35 +32,40 @@ namespace Business
                 player = new Monster();
             }
             player.Client = loggedClient;
-            Store.AllPlayers.Add(player);
+            allPlayers = Store.GetAllPlayers();
+            allPlayers.Add(player);
+            Store.SetAllPlayers(allPlayers);
         }
 
         public void JoinPlayerToGame(Player loggedPlayer)
         {
-            if (Store.ActiveGame.Players.Count < 4 && !TimeHasPassed(Store.ActiveGame.LimitJoiningTime))
+            activeGame = Store.GetGame();
+            if (activeGame.Players.Count < 4 && !TimeHasPassed(activeGame.LimitJoiningTime))
             {
-                Store.ActiveGame.Players.Add(loggedPlayer);
+                activeGame.Players.Add(loggedPlayer);
                 loggedPlayer.NumOfActions = GetMaxTurn();
                 LocatePlayersInBoard();
             }
-            else if (!TimeHasPassed(Store.ActiveGame.LimitJoiningTime))
+            else if (!TimeHasPassed(activeGame.LimitJoiningTime))
             {
-                var remainingTime = Store.ActiveGame.StartTime.AddMinutes(3) - (DateTime.Now - Store.ActiveGame.StartTime);
+                var remainingTime = activeGame.StartTime.AddMinutes(3) - (DateTime.Now - activeGame.StartTime);
                 throw new FullGameException("Game is full, try again at " + remainingTime.ToString("HH:mm"));
             }
             else
             {
-                var remainingTime = Store.ActiveGame.StartTime.AddMinutes(3) - (DateTime.Now - Store.ActiveGame.StartTime);
+                var remainingTime = activeGame.StartTime.AddMinutes(3) - (DateTime.Now - activeGame.StartTime);
                 throw new FullGameException("You can no longer join this game, try again at " + remainingTime.ToString("HH:mm"));
             }
+            Store.SetGame(activeGame);
         }
 
         private void CheckIfGameHasMonster()
         {
-            if (Store.ActiveGame != null && Store.ActiveGame.Players.Count() == 3)
+            activeGame = Store.GetGame();
+            if (activeGame != null && activeGame.Players.Count() == 3)
             {
                 int countMonsters = 0;
-                foreach (Player pl in Store.ActiveGame.Players)
+                foreach (Player pl in activeGame.Players)
                 {
                     if (pl is Monster) countMonsters++;
                 }
@@ -67,7 +75,7 @@ namespace Business
 
         private bool TimeHasPassed(double minutes)
         {
-            DateTime startTime = Store.ActiveGame.StartTime;
+            DateTime startTime = Store.GetGame().StartTime;
             DateTime endTime = startTime.AddMinutes(minutes);
             DateTime now = DateTime.Now;
             if (now < endTime)
@@ -82,19 +90,24 @@ namespace Business
 
         private void LocatePlayersInBoard()
         {
-            foreach (Player pl in Store.ActiveGame.Players)
+            activeGame = Store.GetGame();
+            board = Store.GetBoard();
+            foreach (Player pl in activeGame.Players)
             {
                 if (pl.Position == null)
                 {
                     int[] pos = GeneratePlayerPosition();
-                    pl.Position = Store.Board.Cells[pos[0], pos[1]];
-                    Store.Board.Cells[pos[0], pos[1]].Player = pl;
+                    pl.Position = board.Cells[pos[0], pos[1]];
+                    board.Cells[pos[0], pos[1]].Player = pl;
                 }
             }
+            Store.SetGame(activeGame);
+            Store.SetBoard(board);
         }
 
         private int[] GeneratePlayerPosition()
         {
+            board = Store.GetBoard();
             int[] pos = new int[2];
             Random ran = new Random();
             bool exit = false;
@@ -102,7 +115,7 @@ namespace Business
             {
                 int x = ran.Next(0, 8);
                 int y = ran.Next(0, 8);
-                if (Store.Board.Cells[x, y].Player == null)
+                if (board.Cells[x, y].Player == null)
                 {
                     pos[0] = x;
                     pos[1] = y;
@@ -115,7 +128,7 @@ namespace Business
         private int GetMaxTurn()
         {
             int max = 0;
-            foreach (Player pl in Store.ActiveGame.Players)
+            foreach (Player pl in Store.GetGame().Players)
             {
                 if (pl.NumOfActions > max) max = pl.NumOfActions;
             }

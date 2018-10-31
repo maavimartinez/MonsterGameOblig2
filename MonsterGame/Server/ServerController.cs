@@ -10,7 +10,7 @@ using System.IO;
 using System.Drawing;
 using Protocol;
 
-namespace Server
+namespace GameServer
 {
 
     public class ServerController
