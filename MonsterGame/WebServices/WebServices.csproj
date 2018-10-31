@@ -42,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converter.cs" />
-    <Compile Include="CrudAction.cs" />
     <Compile Include="CRUDClientService.cs" />
     <Compile Include="ICRUDClientService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

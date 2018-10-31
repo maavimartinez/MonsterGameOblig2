@@ -14,18 +14,18 @@ namespace WebServices
             gameLogic = MainController.GameLogicInstance();
         }
 
-        public bool CreateClient(ClientCredentials clientCredentials)
+        public bool CreateClient(ClientCredentials credentials)
         {
-            Client client = Converter.ClientCredentialsToClient(clientCredentials);
+            Client client = Converter.ClientCredentialsToClient(credentials);
 
             bool result = gameLogic.CreateClient(client);
 
             return result;
         }
 
-        public bool DeleteClient(ClientCredentials clientDto)
+        public bool DeleteClient(ClientCredentials credentials)
         {
-            Client client = Converter.ClientCredentialsToClient(clientDto);
+            Client client = Converter.ClientCredentialsToClient(credentials);
 
             bool result = gameLogic.DeleteClient(client);
 
@@ -34,19 +34,19 @@ namespace WebServices
 
         public List<ClientCredentials> GetClients()
         {
-            List<ClientCredentials> clientDtos = new List<ClientCredentials>();
+            List<ClientCredentials> credentials = new List<ClientCredentials>();
 
-            gameLogic.GetClients().ForEach(c => clientDtos.Add(Converter.ClientToClientCredentials(c)));
+            gameLogic.GetClients().ForEach(c => credentials.Add(Converter.ClientToCredentials(c)));
 
-            return clientDtos;
+            return credentials;
         }
 
-        public bool UpdateClient(ClientCredentials existingClientCredentials, ClientCredentials newClientCredentials)
+        public bool UpdateClient(ClientCredentials oldCredentials, ClientCredentials newCredentials)
         {
-            Client existingClient = Converter.ClientCredentialsToClient(existingClientCredentials);
-            Client newClient = Converter.ClientCredentialsToClient(newClientCredentials);
+            Client old = Converter.ClientCredentialsToClient(oldCredentials);
+            Client newC = Converter.ClientCredentialsToClient(newCredentials);
 
-            bool result = gameLogic.UpdateClient(existingClient, newClient);
+            bool result = gameLogic.UpdateClient(old, newC);
 
             return result;
         }

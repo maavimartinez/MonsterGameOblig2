@@ -5,12 +5,12 @@ namespace WebServices
 {
     public class Converter
     {
-        public static Client ClientCredentialsToClient(ClientCredentials clientDto)
+        public static Client ClientCredentialsToClient(ClientCredentials credentials)
         {
-            return new Client(clientDto.Username, clientDto.Password);
+            return new Client(credentials.Username, credentials.Password);
         }
 
-        public static ClientCredentials ClientToClientCredentials(Client client)
+        public static ClientCredentials ClientToCredentials(Client client)
         {
             return new ClientCredentials()
             {

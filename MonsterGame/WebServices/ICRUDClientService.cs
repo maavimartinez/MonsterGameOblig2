@@ -11,7 +11,7 @@ namespace WebServices
         bool CreateClient(ClientCredentials client);
 
         [OperationContract]
-        bool UpdateClient(ClientCredentials existingClientDto, ClientCredentials newClientDto);
+        bool UpdateClient(ClientCredentials old, ClientCredentials newC);
 
         [OperationContract]
         bool DeleteClient(ClientCredentials client);
