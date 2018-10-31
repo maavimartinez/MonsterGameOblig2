@@ -16,7 +16,7 @@ namespace StorageServer
             try
             {
                 ChannelServices.RegisterChannel(serverChannel, false);
-                RemotingConfiguration.RegisterWellKnownServiceType(typeof(Store), StoreSettings.StoreName, WellKnownObjectMode.Singleton);
+                RemotingConfiguration.RegisterWellKnownServiceType(typeof(Store), "RemoteStore", WellKnownObjectMode.Singleton);
                 Console.WriteLine("Store server started, click any key to stop.");
                 Console.ReadLine();
                 ChannelServices.UnregisterChannel(serverChannel);

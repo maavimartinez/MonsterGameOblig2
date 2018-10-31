@@ -11,7 +11,7 @@ namespace WebServices
 
         public CRUDClientService()
         {
-            gameLogic = CoreController.GameLogicInstance();
+            gameLogic = MainController.GameLogicInstance();
         }
 
         public bool CreateClient(ClientCredentials clientCredentials)

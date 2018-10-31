@@ -16,16 +16,16 @@ namespace Business
             return (string)appSettings.GetValue("LogServerIp", typeof(string));
         }
 
-        public static string GetStoreServerIpFromConfigFile()
+        public static string GetStorageServerIpFromConfigFile()
         {
             var appSettings = new AppSettingsReader();
-            return (string)appSettings.GetValue("StoreServerIp", typeof(string));
+            return (string)appSettings.GetValue("StorageServerIp", typeof(string));
         }
 
-        public static int GetStoreServerPortFromConfigFile()
+        public static int GetStorageServerPortFromConfigFile()
         {
             var appSettings = new AppSettingsReader();
-            return (int)appSettings.GetValue("StoreServerPort", typeof(int));
+            return (int)appSettings.GetValue("StorageServerPort", typeof(int));
         }
     }
 }

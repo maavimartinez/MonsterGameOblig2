@@ -10,14 +10,14 @@ namespace CRUDServer
     {
         static void Main(string[] args)
         {
-            string storeServerIp = Settings.GetStoreServerIpFromConfigFile();
-            int storeServerPort = Settings.GetStoreServerPortFromConfigFile();
+            string storageServerIp = Settings.GetStorageServerIpFromConfigFile();
+            int storageServerPort = Settings.GetStorageServerPortFromConfigFile();
 
             Store store = null;
             try
             {
                 store = (Store)Activator.GetObject(typeof(Store),
-                    $"tcp://{storeServerIp}:{storeServerPort}/{StoreSettings.StoreName}");
+                    $"tcp://{storageServerIp}:{storageServerPort}/RemoteStore");
                 store.GetClients();
             }
             catch (Exception)
@@ -27,7 +27,7 @@ namespace CRUDServer
                 Environment.Exit(0);
             }
 
-            CoreController.Build(store);
+            MainController.CreateInstance(store);
 
             WCFHost wcfHostService = new WCFHost();
             var wcfHostThread = new Thread((() => wcfHostService.Start()));

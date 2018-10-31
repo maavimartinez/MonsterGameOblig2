@@ -2,22 +2,22 @@
 
 namespace Business
 {
-    public class CoreController
+    public class MainController
     {
-        private static CoreController single_instance = null;
+        private static MainController singleton = null;
         private static GameLogic gameLogic = null;
 
-        private CoreController(IStore store)
+        private MainController(IStore store)
         {
             gameLogic = new GameLogic(store);
         }
 
-        public static void Build(IStore store)
+        public static void CreateInstance(IStore store)
         {
-            if (single_instance == null)
-                single_instance = new CoreController(store);
+            if (singleton == null)
+                singleton = new MainController(store);
             else
-                throw new InvalidOperationException("Building more than one instance of the store.");
+                throw new InvalidOperationException("Creating more than one instance of the store.");
         }
 
         public static GameLogic GameLogicInstance()
@@ -29,5 +29,6 @@ namespace Business
         {
             gameLogic = null;
         }
+
     }
 }

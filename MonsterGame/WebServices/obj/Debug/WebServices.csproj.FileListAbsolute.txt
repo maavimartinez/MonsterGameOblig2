@@ -6,3 +6,5 @@ C:\Users\Ernesto\Desktop\REPOSITORIO2\MonsterGameOblig2\MonsterGame\WebServices\
 C:\Users\Ernesto\Desktop\REPOSITORIO2\MonsterGameOblig2\MonsterGame\WebServices\bin\Debug\Entities.cs.pdb
 C:\Users\Ernesto\Desktop\REPOSITORIO2\MonsterGameOblig2\MonsterGame\WebServices\obj\Debug\WebServices.dll
 C:\Users\Ernesto\Desktop\REPOSITORIO2\MonsterGameOblig2\MonsterGame\WebServices\obj\Debug\WebServices.pdb
+C:\Users\Ernesto\Desktop\REPOSITORIO2\MonsterGameOblig2\MonsterGame\WebServices\obj\Debug\WebServices.csprojResolveAssemblyReference.cache
+C:\Users\Ernesto\Desktop\REPOSITORIO2\MonsterGameOblig2\MonsterGame\WebServices\bin\Debug\WebServices.dll.config
