@@ -50,7 +50,22 @@ namespace Persistence
 
         public void SetGame(Game game)
         {
-            this.ActiveGame = ActiveGame;
+            this.ActiveGame = game;
+            UpdateGamePlayersOnAllPlayers(game);
+        }
+
+        public void UpdateGamePlayersOnAllPlayers(Game activeGame)
+        {
+            foreach(Player pl in activeGame.Players)
+            {
+                for(int i=0; i < AllPlayers.Count; i++)
+                {
+                    if(AllPlayers[i].Client.Username == pl.Client.Username)
+                    {
+                        AllPlayers[i] = pl;
+                    }
+                }
+            }
         }
 
         public Board GetBoard()

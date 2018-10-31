@@ -1,5 +1,8 @@
+using System;
+
 namespace Entities
 {
+    [Serializable]
     public class Monster : Player
     {
         public Monster()

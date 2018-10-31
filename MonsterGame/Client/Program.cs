@@ -2,7 +2,6 @@
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 
-
 namespace GameClient
 {
     class Program

@@ -48,9 +48,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Router.cs" />
     <Compile Include="ServerController.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
+    <Compile Include="ServerLauncher.cs" />
+    <Compile Include="ServerPrompt.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Business\Business.csproj">
@@ -73,6 +72,9 @@
       <Project>{6458c1c9-1f78-49d4-80b4-16627a0f0669}</Project>
       <Name>UI</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Entities
 {
+    [Serializable]
     public class Game
     {
         public List<Player> Players { get; set; }
@@ -21,7 +22,7 @@ namespace Entities
 
         public Game()
         {
-            LimitJoiningTime = 0.3;
+            LimitJoiningTime = 2;
             Players = new List <Player>();
             isOn = false;
             Result = "";

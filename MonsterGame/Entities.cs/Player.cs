@@ -1,6 +1,8 @@
+using System;
+
 namespace Entities
 {
-
+    [Serializable]
     public abstract class Player
     {
 

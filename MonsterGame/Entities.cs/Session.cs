@@ -3,6 +3,7 @@ using System.Security.Cryptography;
 
 namespace Entities
 {
+    [Serializable]
     public class Session
     {
         public Session(Client client)
