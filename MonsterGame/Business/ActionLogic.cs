@@ -30,6 +30,8 @@ namespace Business
             List<string> ret = new List<string>();
             bool right = CheckRightTurn(player);
             ret = TranslateAndDoAction(player, action);
+            activeGame = Store.GetGame();
+            player = activeGame.Players.Find(h => h.Client.Username == player.Client.Username);
             int x = player.Position.X;
             int y = player.Position.Y;
             ret = ret.Concat(GetNearPlayers(x, y)).ToList();
@@ -183,7 +185,9 @@ namespace Business
         private void LocatePlayerOnCell(Player player, int x, int y)
         {
             board = Store.GetBoard();
-            player.Position = board.Cells[x, y];
+            activeGame = Store.GetGame();
+            activeGame.Players.Find(h => h.Client.Username == player.Client.Username).Position = board.Cells[x, y];
+            Store.SetGame(activeGame);
             board.Cells[x, y].Player = player;
             Store.SetBoard(board);
         }
