@@ -33,6 +33,9 @@ namespace Business
         Player GetLoggedPlayer(string username);
 
         void AddLogEntry(LogEntry entryAttributes);
+    
+        List<LogEntry> GetLogEntries();
+        LogEntry GetLastLogEntry();
 
     }
 }
