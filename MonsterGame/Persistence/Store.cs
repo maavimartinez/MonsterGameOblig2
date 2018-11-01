@@ -10,7 +10,7 @@ namespace Persistence
     {
         private List<Client> Clients { get; set; }
         public List<Player> AllPlayers { get; set; }
-      //  private List<LogEntry> LogEntries { get; set; }
+        private List<LogEntry> LogEntries { get; set; }
         public List<RankingItem> Ranking { get; set; }
         public List<StatisticItem> Statistics { get; set; }
         public Game ActiveGame { get; set; }
@@ -29,7 +29,7 @@ namespace Persistence
             AllPlayers = new List<Player>();
             Ranking = new List<RankingItem>();
             Statistics = new List<StatisticItem>();
-            //LogEntries = new List<LogEntry>();
+            LogEntries = new List<LogEntry>();
         }
 
         public bool ClientExists(Client client)
