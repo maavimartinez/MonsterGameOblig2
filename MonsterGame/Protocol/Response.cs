@@ -7,7 +7,7 @@ namespace Protocol
     {
 
         private readonly string[] responsePackage;
-        
+
         private string MyResponseCode => responsePackage[0];
 
         private int Code {

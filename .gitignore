@@ -1,3 +1,22 @@
 
 MonsterGame/Server/obj/Debug/build.force
 MonsterGame/UI/obj/Debug/build.force
+MonsterGame/StorageServer/bin/Debug/Business.dll
+MonsterGame/StorageServer/bin/Debug/Business.pdb
+MonsterGame/StorageServer/bin/Debug/Entities.cs.dll
+MonsterGame/StorageServer/bin/Debug/Entities.cs.pdb
+MonsterGame/StorageServer/bin/Debug/Persistence.dll
+MonsterGame/StorageServer/bin/Debug/Persistence.pdb
+MonsterGame/StorageServer/bin/Debug/StorageServer.exe
+MonsterGame/StorageServer/bin/Debug/StorageServer.exe.config
+MonsterGame/StorageServer/bin/Debug/StorageServer.pdb
+MonsterGame/StorageServer/bin/Debug/StorageServer.vshost.exe.config
+MonsterGame/StorageServer/bin/Debug/StorageServer.vshost.exe.manifest
+MonsterGame/StorageServer/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+MonsterGame/StorageServer/obj/Debug/StorageServer.csprojResolveAssemblyReference.cache
+MonsterGame/StorageServer/obj/Debug/StorageServer.exe
+MonsterGame/StorageServer/obj/Debug/StorageServer.pdb
+MonsterGame/StorageServer/obj/Debug/TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
+MonsterGame/StorageServer/obj/Debug/TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs
+MonsterGame/StorageServer/obj/Debug/TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs
+

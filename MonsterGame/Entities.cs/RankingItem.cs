@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-
+    [Serializable]
     public class RankingItem
     {
         public string Username { get; set; }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
+    [Serializable]
     public class StatisticItem
     {
         public List<StatisticDetail> gameStatistic { get; set; }
