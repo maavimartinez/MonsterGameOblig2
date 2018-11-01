@@ -1,5 +1,7 @@
 ﻿using System;
 using Protocol;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GameServer
 {
@@ -8,9 +10,14 @@ namespace GameServer
 
         private readonly ServerController serverController;
 
+        private LogRouter logRouter;
+
+
         public Router(ServerController serverController)
         {
             this.serverController = serverController;
+            logRouter = new LogRouter();
+
         }
 
         public void Handle(Connection conn)
@@ -28,7 +35,8 @@ namespace GameServer
                             serverController.ConnectClient(conn, request);
                             break;
                         case Command.DoAction:
-                            serverController.DoAction(conn, request);
+                            List<string> gameFinished= serverController.DoAction(conn, request);
+                            ShowIfGameFinished(gameFinished);
                             break;
                         case Command.ListPlayersInGame:
                             serverController.ListPlayersInGame(conn, request);
@@ -58,7 +66,8 @@ namespace GameServer
                             serverController.CheckIfGameHasFinished(conn, request);
                             break;
                         case Command.GetResultByTimesOut:
-                            serverController.GetResultByTimesOut(conn, request);
+                            List<string> result = serverController.GetResultByTimesOut(conn, request);
+                            ShowIfGameFinished(result);
                             break;
                         case Command.ReadyToSendPicture:
                             serverController.ReadyToSendPicture(conn, request);
@@ -80,6 +89,24 @@ namespace GameServer
                     break;
                 }
             }
+        }
+
+        private void ShowIfGameFinished(List<string> responseMessage)
+        {
+            for (int i = 0; i < responseMessage.Count(); i++)
+            {
+                if (responseMessage[i] == "FINISHED")
+                {
+                    if (responseMessage[i + 1].Equals("Game has finished", StringComparison.OrdinalIgnoreCase))
+                    {
+                        goto End;
+                    }
+                    logRouter.LogResult(responseMessage);
+
+                    //Console.WriteLine(responseMessage[i + 1]);
+                }
+            }
+            End:;
         }
 
     }

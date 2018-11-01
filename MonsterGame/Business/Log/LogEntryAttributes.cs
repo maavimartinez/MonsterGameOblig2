@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Business
 {
     public abstract class LogEntryAttributes
     {
-        public string ClientUsername { get; set; }
+        //BORRAR??
+        public List<string> Result { get; set; }
         public DateTime Timestamp { get; set; }
     }
 }

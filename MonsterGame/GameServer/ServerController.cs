@@ -167,8 +167,10 @@ namespace GameServer
             }
         }
 
-        public void DoAction(Connection connection, Request request)
+        public List<string> DoAction(Connection connection, Request request)
         {
+            List<string> result = new List<string>();
+
             try
             {
                 Client loggedUser = CurrentClient(request);
@@ -179,6 +181,9 @@ namespace GameServer
                 List<string> answer = new List<string>();
 
                 answer = answer.Concat(gameLogic.DoAction(usernameFrom, action)).ToList();
+
+                result = answer;
+
                 answer.Insert(0, GetPlayerPosition(loggedUser.Username));
 
                 connection.SendMessage(BuildResponse(ResponseCode.Ok, answer.ToArray()));
@@ -199,6 +204,7 @@ namespace GameServer
             {
                 connection.SendMessage(BuildResponse(ResponseCode.BadRequest, e.Message));
             }
+            return result;
         }
 
         public void DisconnectClient(Connection connection, Request request)
@@ -246,11 +252,12 @@ namespace GameServer
 
         }
 
-        public void GetResultByTimesOut(Connection connection, Request request)
+        public List<string> GetResultByTimesOut(Connection connection, Request request)
         {
+            List<string> timesOut = new List<string>();
             try
             {
-                List<string> timesOut = gameLogic.GetGameResultByTimeOut();
+                timesOut = gameLogic.GetGameResultByTimeOut();
 
                 connection.SendMessage(BuildResponse(ResponseCode.Ok, timesOut.ToArray()));
             }
@@ -262,6 +269,7 @@ namespace GameServer
             {
                 connection.SendMessage(BuildResponse(ResponseCode.Unauthorized, e.Message));
             }
+            return timesOut;
         }
 
         public void RemovePlayerFromGame(Connection connection, Request request)

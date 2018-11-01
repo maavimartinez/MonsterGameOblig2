@@ -19,13 +19,13 @@ namespace Business
         public static string GetStoreServerIpFromConfigFile()
         {
             var appSettings = new AppSettingsReader();
-            return (string)appSettings.GetValue("StoreServerIp", typeof(string));
+            return (string)appSettings.GetValue("StorageServerIp", typeof(string));
         }
 
         public static int GetStoreServerPortFromConfigFile()
         {
             var appSettings = new AppSettingsReader();
-            return (int)appSettings.GetValue("StoreServerPort", typeof(int));
+            return (int)appSettings.GetValue("StorageServerPort", typeof(int));
         }
     }
 }
