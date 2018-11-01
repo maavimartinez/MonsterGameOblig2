@@ -481,6 +481,7 @@ namespace GameClient
                 if (response.GameHasFinished())
                 {
                     GetResultByTimesOut();
+                    timesOut = true;
                 }
                 else if (response.LastPlayerAbandoned())
                 {

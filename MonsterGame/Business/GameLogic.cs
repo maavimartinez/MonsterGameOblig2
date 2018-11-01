@@ -170,7 +170,7 @@ namespace Business
             bool aux = false;
             if (lastPlayerWantsToLeave.Equals("true", StringComparison.OrdinalIgnoreCase)) aux = true;
             if (aux) throw new LastPlayerAbandonedGameException();
-            if ((TimeHasPassed(3)))
+            if ((TimeHasPassed(0.6)))
             {
                 throw new TimesOutException("");
             }
@@ -392,7 +392,7 @@ namespace Business
 
         private void CreateGameStatistic(string winners)
         {
-            activeGame = Store.GetGame();
+        /*    activeGame = Store.GetGame();
             statistics = Store.GetStatistics();
             statistics.RemoveAt(0);
             StatisticItem gameSt = new StatisticItem();
@@ -424,7 +424,7 @@ namespace Business
                 }
             }
             statistics.Add(gameSt);
-            Store.SetStatistics(statistics);
+            Store.SetStatistics(statistics);*/
         }
 
         private bool PlayerIsInWinnerString(Player pl, string winnerString)

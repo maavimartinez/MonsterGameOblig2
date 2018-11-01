@@ -26,6 +26,8 @@ namespace Persistence
         {
             Clients = new List<Client>();
             AllPlayers = new List<Player>();
+            Ranking = new List<RankingItem>();
+            Statistics = new List<StatisticItem>();
         }
 
         public bool ClientExists(Client client)
