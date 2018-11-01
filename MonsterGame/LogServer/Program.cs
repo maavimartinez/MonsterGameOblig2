@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Threading;
 using Business;
 using Persistence;
@@ -15,7 +15,7 @@ namespace LogServer
             try
             {
                 store = (Store)Activator.GetObject(typeof(Store),
-                    $"tcp://{storeServerIp}:{storeServerPort}/{StoreUtillities.StoreName}");
+                    $"tcp://{storeServerIp}:{storeServerPort}/RemoteStore");
                 store.GetClients();
             }
             catch (Exception)
@@ -24,10 +24,10 @@ namespace LogServer
                 Thread.Sleep(5000);
                 Environment.Exit(0);
             }
-            CoreController.Build(store);
-            BusinessController businessController = CoreController.BusinessControllerInstance();
+            MainController.CreateInstance(store);
+            GameLogic gameLogic = MainController.GameLogicInstance();
 
-            var msmqServer = new MessageQueueServer(businessController);
+            var msmqServer = new MessageQueueServer(gameLogic);
             var msmqServerThread = new Thread(() => msmqServer.Start());
             msmqServerThread.Start();
 

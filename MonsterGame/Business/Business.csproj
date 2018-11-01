@@ -61,6 +61,10 @@
     <Compile Include="Exceptions\ClientNotConnectedException.cs" />
     <Compile Include="Exceptions\RecordNotFoundException.cs" />
     <Compile Include="IStore.cs" />
+    <Compile Include="Log\LogEntry.cs" />
+    <Compile Include="Log\LogEntryAttributes.cs" />
+    <Compile Include="Log\QueueSettings.cs" />
+    <Compile Include="Log\Utilities.cs" />
     <Compile Include="MainController.cs" />
     <Compile Include="PlayerLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

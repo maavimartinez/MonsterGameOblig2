@@ -163,5 +163,29 @@ namespace Persistence
         {
             this.Statistics = statistics;
         }
+
+        public void AddLogEntry(LogEntry entry)
+        {
+            lock (logLocker)
+            {
+                LogEntries.Add(entry);
+            }
+        }
+
+        public List<LogEntry> GetLogEntries()
+        {
+            lock (logLocker)
+            {
+                return LogEntries;
+            }
+        }
+
+        public LogEntry GetLastLogEntry()
+        {
+            lock (logLocker)
+            {
+                return LogEntries.Last();
+            }
+        }
     }
 }

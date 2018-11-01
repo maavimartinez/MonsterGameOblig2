@@ -395,8 +395,16 @@ namespace Business
             Store.AddLogEntry(entry);
         }
 
-    }
-}
+        public LogEntry GetLastLogEntry()
+        {
+            return Store.GetLastLogEntry();
+        }
+
+        public List<LogEntry> GetLogEntries()
+        {
+            return Store.GetLogEntries();
+        }
+
         private void CreateGameStatistic(string winners)
         {
             activeGame = Store.GetGame();

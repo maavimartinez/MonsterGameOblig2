@@ -16,7 +16,7 @@ namespace LogServer
         public MessageQueueServer(GameLogic gameLogic)
         {
             isServerRunning = true;
-            QueuePath = QueueUtillities.QueueCreationPath();
+            QueuePath = QueueSettings.QueueCreationPath();
             this.gameLogic = gameLogic;
         }
 
