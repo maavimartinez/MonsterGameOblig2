@@ -51,7 +51,6 @@ namespace GameServer
                 Environment.Exit(0);
             }
 
-            MainController.Build(store);
             MainController.CreateInstance(store);
             GameLogic gameLogic = MainController.GameLogicInstance();
 

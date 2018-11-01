@@ -32,7 +32,7 @@ namespace Business
 
         Player GetLoggedPlayer(string username);
 
-        void AddLogEntry(LogEntry entryAttributes);
+      //  void AddLogEntry(LogEntry entryAttributes);
 
     }
 }

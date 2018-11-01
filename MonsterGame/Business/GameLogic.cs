@@ -390,26 +390,25 @@ namespace Business
             Store.SetAllPlayers(allPlayers);
         }
 
-        public void AddLogEntry(LogEntry entry)
-        {
-            Store.AddLogEntry(entry);
-        }
+    //    public void AddLogEntry(LogEntry entry)
+    //    {
+    //        Store.AddLogEntry(entry);
+    //    }
 
-    }
-}
         private void CreateGameStatistic(string winners)
         {
-        /*    activeGame = Store.GetGame();
+            activeGame = Store.GetGame();
             statistics = Store.GetStatistics();
-            statistics.RemoveAt(0);
+            if (statistics.Count == 10) statistics.RemoveAt(0);
             StatisticItem gameSt = new StatisticItem();
+            gameSt.gameStatistic = new List<StatisticDetail>();
             if (winners.Equals("Nobody won :("))
             {
                 foreach(Player pl in activeGame.Players)
                 {
                     StatisticDetail sd = new StatisticDetail();
                     sd.Outcome = "Lost";
-                    sd.Role = pl.GetType();
+                    sd.Role = pl.GetType().Name;
                     sd.Username = pl.Client.Username;
                     gameSt.gameStatistic.Add(sd);
                 }
@@ -418,7 +417,7 @@ namespace Business
                 foreach (Player pl in activeGame.Players)
                 {
                     StatisticDetail sd = new StatisticDetail();
-                    sd.Role = pl.GetType();
+                    sd.Role = pl.GetType().Name;
                     sd.Username = pl.Client.Username;     
                     if (PlayerIsInWinnerString(pl, winners))
                     {
@@ -431,7 +430,7 @@ namespace Business
                 }
             }
             statistics.Add(gameSt);
-            Store.SetStatistics(statistics);*/
+            Store.SetStatistics(statistics);
         }
 
         private bool PlayerIsInWinnerString(Player pl, string winnerString)
