@@ -390,6 +390,13 @@ namespace Business
             Store.SetAllPlayers(allPlayers);
         }
 
+        public void AddLogEntry(LogEntry entry)
+        {
+            Store.AddLogEntry(entry);
+        }
+
+    }
+}
         private void CreateGameStatistic(string winners)
         {
         /*    activeGame = Store.GetGame();

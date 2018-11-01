@@ -31,5 +31,8 @@ namespace Business
         void SetStatistics(List<StatisticItem> statistics);
 
         Player GetLoggedPlayer(string username);
+
+        void AddLogEntry(LogEntry entryAttributes);
+
     }
 }
