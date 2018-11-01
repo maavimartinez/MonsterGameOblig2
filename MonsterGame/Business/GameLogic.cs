@@ -344,5 +344,10 @@ namespace Business
             Store.SetAllPlayers(allPlayers);
         }
 
+        public void AddLogEntry(LogEntry entry)
+        {
+            Store.AddLogEntry(entry);
+        }
+
     }
 }

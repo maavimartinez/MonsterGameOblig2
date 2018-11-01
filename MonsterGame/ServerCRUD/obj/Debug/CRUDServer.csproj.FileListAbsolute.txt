@@ -12,3 +12,17 @@ C:\Users\Ernesto\Desktop\REPOSITORIO2\MonsterGameOblig2\MonsterGame\ServerCRUD\b
 C:\Users\Ernesto\Desktop\REPOSITORIO2\MonsterGameOblig2\MonsterGame\ServerCRUD\bin\Debug\WebServices.pdb
 C:\Users\Ernesto\Desktop\REPOSITORIO2\MonsterGameOblig2\MonsterGame\ServerCRUD\obj\Debug\ServerCRUD.exe
 C:\Users\Ernesto\Desktop\REPOSITORIO2\MonsterGameOblig2\MonsterGame\ServerCRUD\obj\Debug\ServerCRUD.pdb
+C:\Users\Usuario\Desktop\MonsterGameOblig2\MonsterGame\ServerCRUD\bin\Debug\ServerCRUD.exe.config
+C:\Users\Usuario\Desktop\MonsterGameOblig2\MonsterGame\ServerCRUD\bin\Debug\ServerCRUD.exe
+C:\Users\Usuario\Desktop\MonsterGameOblig2\MonsterGame\ServerCRUD\bin\Debug\ServerCRUD.pdb
+C:\Users\Usuario\Desktop\MonsterGameOblig2\MonsterGame\ServerCRUD\bin\Debug\Business.dll
+C:\Users\Usuario\Desktop\MonsterGameOblig2\MonsterGame\ServerCRUD\bin\Debug\Entities.cs.dll
+C:\Users\Usuario\Desktop\MonsterGameOblig2\MonsterGame\ServerCRUD\bin\Debug\Persistence.dll
+C:\Users\Usuario\Desktop\MonsterGameOblig2\MonsterGame\ServerCRUD\bin\Debug\WebServices.dll
+C:\Users\Usuario\Desktop\MonsterGameOblig2\MonsterGame\ServerCRUD\bin\Debug\Business.pdb
+C:\Users\Usuario\Desktop\MonsterGameOblig2\MonsterGame\ServerCRUD\bin\Debug\Entities.cs.pdb
+C:\Users\Usuario\Desktop\MonsterGameOblig2\MonsterGame\ServerCRUD\bin\Debug\Persistence.pdb
+C:\Users\Usuario\Desktop\MonsterGameOblig2\MonsterGame\ServerCRUD\bin\Debug\WebServices.pdb
+C:\Users\Usuario\Desktop\MonsterGameOblig2\MonsterGame\ServerCRUD\obj\Debug\CRUDServer.csprojResolveAssemblyReference.cache
+C:\Users\Usuario\Desktop\MonsterGameOblig2\MonsterGame\ServerCRUD\obj\Debug\ServerCRUD.exe
+C:\Users\Usuario\Desktop\MonsterGameOblig2\MonsterGame\ServerCRUD\obj\Debug\ServerCRUD.pdb

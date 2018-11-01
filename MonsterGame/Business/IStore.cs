@@ -25,5 +25,8 @@ namespace Business
         void SetAllPlayers(List<Player> players);
 
         Player GetLoggedPlayer(string username);
+
+        void AddLogEntry(LogEntry entryAttributes);
+
     }
 }

@@ -51,8 +51,8 @@ namespace GameServer
                 Environment.Exit(0);
             }
 
-            CoreController.Build(store);
-            GameLogic gameLogic = CoreController.GameLogicInstance();
+            MainController.Build(store);
+            GameLogic gameLogic = MainController.GameLogicInstance();
 
             var launcher = new ServerLauncher(ip, port);
             launcher.Launch();
