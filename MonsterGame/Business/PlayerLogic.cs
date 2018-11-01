@@ -43,8 +43,8 @@ namespace Business
                if (activeGame.Players.Count < 4 && !TimeHasPassed(activeGame.LimitJoiningTime))
                {
                     activeGame.Players.Add(loggedPlayer);
-                Store.SetGame(activeGame);
-                loggedPlayer.NumOfActions = GetMaxTurn();
+                    Store.SetGame(activeGame);
+                    loggedPlayer.NumOfActions = GetMaxTurn();
                     LocatePlayersInBoard();
                }
                else if (!TimeHasPassed(activeGame.LimitJoiningTime))

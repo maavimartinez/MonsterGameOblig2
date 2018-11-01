@@ -24,6 +24,12 @@ namespace Business
         List<Player> GetAllPlayers();
         void SetAllPlayers(List<Player> players);
 
+        List<RankingItem> GetRanking();
+        void SetRanking(List<RankingItem> ranking);
+
+        List<StatisticItem> GetStatistics();
+        void SetStatistics(List<StatisticItem> statistics);
+
         Player GetLoggedPlayer(string username);
 
         void AddLogEntry(LogEntry entryAttributes);

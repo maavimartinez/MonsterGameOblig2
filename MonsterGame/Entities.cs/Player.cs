@@ -16,6 +16,8 @@ namespace Entities
 
         public int  NumOfActions { get; set; }
 
+        public int Score { get; set; }
+
         public Cell Position { get;set; }
 
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Entities;
 using Business;
+using System.Linq;
 
 namespace Persistence
 {
@@ -10,6 +11,8 @@ namespace Persistence
         private List<Client> Clients { get; set; }
         public List<Player> AllPlayers { get; set; }
         private List<LogEntry> LogEntries { get; set; }
+        public List<RankingItem> Ranking { get; set; }
+        public List<StatisticItem> Statistics { get; set; }
         public Game ActiveGame { get; set; }
         public Board Board { get; set; }
 
@@ -139,6 +142,26 @@ namespace Persistence
                 storedClient.Username = newClient.Username;
                 storedClient.Password = newClient.Password;
             }
+        }
+
+        public List<RankingItem> GetRanking()
+        {
+            return this.Ranking.OrderByDescending(x=>x.Score).ToList();
+        }
+
+        public void SetRanking(List<RankingItem> newRanking)
+        {
+            this.Ranking = newRanking;
+        }
+
+        public List<StatisticItem> GetStatistics()
+        {
+            return this.Statistics;
+        }
+
+        public void SetStatistics(List<StatisticItem> statistics)
+        {
+            this.Statistics = statistics;
         }
     }
 }
