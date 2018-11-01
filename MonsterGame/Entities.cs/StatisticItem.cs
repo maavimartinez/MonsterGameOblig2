@@ -8,8 +8,6 @@ namespace Entities
 {
     public class StatisticItem
     {
-        public string Username { get; set; }
-        public string Role { get; set; }
-        public string Outcome { get; set; }
+        public List<StatisticDetail> gameStatistic { get; set; }
     }
 }

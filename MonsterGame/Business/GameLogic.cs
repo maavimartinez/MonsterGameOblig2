@@ -19,6 +19,7 @@ namespace Business
         private Board board { get; set; }
         private List<Player> allPlayers { get; set; }
         private List<RankingItem> ranking { get; set; }
+        private List<StatisticItem> statistics { get; set; }
 
         public GameLogic(IStore store)
         {
@@ -193,12 +194,14 @@ namespace Business
             if (aliveSurvivors != "")
             {
                 aliveSurvivors.Trim(',');
-                ActiveGameResult = aliveSurvivors + " won !";
+                ActiveGameResult = aliveSurvivors + " ,won !";
+                CreateGameStatistic(aliveSurvivors);
                 return EndGame();
             }
             else if (aliveSurvivors == "")
             {
                 ActiveGameResult = "Nobody won :(";
+                CreateGameStatistic("Nobody won :(");
                 return EndGame();
             }
             return new List<string>();
@@ -280,6 +283,7 @@ namespace Business
                             ri.Role = pl.GetType();
                             ri.Score = pl.Score;
                             ranking.Add(ri);
+                            break;
                         }
                     }      
                 }
@@ -346,13 +350,15 @@ namespace Business
             if (aliveMonsters == "" && TimeHasPassed(activeGame.LimitJoiningTime))
             {
                 aliveSurvivors = aliveSurvivors.Trim(',');
-                ActiveGameResult = aliveSurvivors + " won !";
+                ActiveGameResult = aliveSurvivors + " ,won !";
+                CreateGameStatistic(aliveSurvivors);
                 return EndGame();
             }
             else if (alivePlayers == 1 && aliveSurvivors == "" && TimeHasPassed(activeGame.LimitJoiningTime))
             {
                 aliveMonsters = aliveMonsters.Trim(',');
-                ActiveGameResult = aliveMonsters + " won !";
+                ActiveGameResult = aliveMonsters + " ,won !";
+                CreateGameStatistic(aliveMonsters);
                 return EndGame();
             }
             return new List<string>();
@@ -382,6 +388,56 @@ namespace Business
                 allPlayers.Remove(pl);
             }
             Store.SetAllPlayers(allPlayers);
+        }
+
+        private void CreateGameStatistic(string winners)
+        {
+            activeGame = Store.GetGame();
+            statistics = Store.GetStatistics();
+            statistics.RemoveAt(0);
+            StatisticItem gameSt = new StatisticItem();
+            if (winners.Equals("Nobody won :("))
+            {
+                foreach(Player pl in activeGame.Players)
+                {
+                    StatisticDetail sd = new StatisticDetail();
+                    sd.Outcome = "Lost";
+                    sd.Role = pl.GetType();
+                    sd.Username = pl.Client.Username;
+                    gameSt.gameStatistic.Add(sd);
+                }
+            }else
+            {
+                foreach (Player pl in activeGame.Players)
+                {
+                    StatisticDetail sd = new StatisticDetail();
+                    sd.Role = pl.GetType();
+                    sd.Username = pl.Client.Username;     
+                    if (PlayerIsInWinnerString(pl, winners))
+                    {
+                        sd.Outcome = "Won";
+                    }else
+                    {
+                        sd.Outcome = "Lost";
+                    }
+                    gameSt.gameStatistic.Add(sd);
+                }
+            }
+            statistics.Add(gameSt);
+            Store.SetStatistics(statistics);
+        }
+
+        private bool PlayerIsInWinnerString(Player pl, string winnerString)
+        {
+            string[] winners = winnerString.Split(',');
+            foreach(string username in winners)
+            {
+                if (username.Equals(pl.Client.Username, StringComparison.CurrentCultureIgnoreCase)) return true;
+            }
+            return false;
+        }
+           
+            
         }
 
     }

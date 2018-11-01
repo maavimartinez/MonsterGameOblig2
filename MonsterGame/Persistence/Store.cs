@@ -151,5 +151,15 @@ namespace Persistence
         {
             this.Ranking = newRanking;
         }
+
+        public List<StatisticItem> GetStatistics()
+        {
+            return this.Statistics;
+        }
+
+        public void SetStatistics(List<StatisticItem> statistics)
+        {
+            this.Statistics = statistics;
+        }
     }
 }
