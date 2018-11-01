@@ -41,7 +41,7 @@ namespace GameServer
             try
             {
                 store = (Store)Activator.GetObject(typeof(Store),
-                    $"tcp://{storeServerIp}:{storeServerPort}/{StoreSettings.StoreName}");
+                    $"tcp://{storeServerIp}:{storeServerPort}/RemoteStore");
                 store.GetClients();
             }
             catch (Exception)
@@ -51,8 +51,8 @@ namespace GameServer
                 Environment.Exit(0);
             }
 
-            CoreController.Build(store);
-            GameLogic gameLogic = CoreController.GameLogicInstance();
+            MainController.CreateInstance(store);
+            GameLogic gameLogic = MainController.GameLogicInstance();
 
             var launcher = new ServerLauncher(ip, port);
             launcher.Launch();
@@ -79,13 +79,13 @@ namespace GameServer
         private static string GetStoreServerIpFromConfigFile()
         {
             var appSettings = new AppSettingsReader();
-            return (string)appSettings.GetValue("StoreServerIp", typeof(string));
+            return (string)appSettings.GetValue("StorageServerIp", typeof(string));
         }
 
         private static int GetStoreServerPortFromConfigFile()
         {
             var appSettings = new AppSettingsReader();
-            return (int)appSettings.GetValue("StoreServerPort", typeof(int));
+            return (int)appSettings.GetValue("StorageServerPort", typeof(int));
         }
     
 

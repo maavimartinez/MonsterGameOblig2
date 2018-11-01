@@ -18,6 +18,7 @@ namespace Business
         private Game activeGame { get; set; }
         private Board board { get; set; }
         private List<Player> allPlayers { get; set; }
+        private List<RankingItem> ranking { get; set; }
 
         public GameLogic(IStore store)
         {
@@ -254,9 +255,48 @@ namespace Business
                 ret.Add("FINISHED");
                 ret.Add(ActiveGameResult.ToUpper());
                 Store.SetGame(activeGame);
+                UpdateRanking();
                 return ret;
             }
             return null;
+        }
+
+        public void UpdateRanking()
+        {
+            activeGame = Store.GetGame();
+            ranking = Store.GetRanking();
+            List<Player> gamePlayers = activeGame.Players.OrderByDescending(x => x.Score).ToList();
+            if(ranking.Count == 10)
+            {
+                foreach(Player pl in gamePlayers)
+                {
+                    for(int j=0; j<ranking.Count; j++)
+                    {
+                        if(pl.Score > ranking.ElementAt(j).Score)
+                        {
+                            ranking.RemoveAt(9);
+                            RankingItem ri = new RankingItem();
+                            ri.GameDate = DateTime.Today;
+                            ri.Role = pl.GetType();
+                            ri.Score = pl.Score;
+                            ranking.Add(ri);
+                        }
+                    }      
+                }
+            }else
+            {
+                int i = 0;
+                while (ranking.Count < 10 && i < gamePlayers.Count)
+                {
+                    RankingItem ri = new RankingItem();
+                    ri.GameDate = DateTime.Today;
+                    ri.Role = gamePlayers[i].GetType();
+                    ri.Score = gamePlayers[i].Score;
+                    ranking.Add(ri);
+                    i++;
+                }
+            }
+            Store.SetRanking(ranking);
         }
 
         public string GetGameResult()

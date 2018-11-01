@@ -163,6 +163,7 @@ namespace Business
             CheckFreePosition(x, y);
             RemovePlayerFromCell(player);
             LocatePlayerOnCell(player, x, y);
+            UpdatePlayerScore(player, "move");
         }
 
         private void CheckValidMovement(Player player, int x, int y)
@@ -208,12 +209,38 @@ namespace Business
             defender.HP = defender.HP - attacker.AP;
             if (defender.HP == 0) defender.IsAlive = false;
             List<string> ret = new List<string>();
+            UpdatePlayerScore(attacker, "attack");
             if (!defender.IsAlive)
             {
                 ret.Add("KILLED");
                 ret.Add(defender.Client.Username);
+                UpdatePlayerScore(attacker, "killed");
+                UpdatePlayerScore(defender, "dead");
             }
             return ret;
+        }
+
+        private void UpdatePlayerScore(Player player, string action)
+        {
+            activeGame = Store.GetGame();
+            if(action == "move")
+            {
+                activeGame.Players.Find(x => x.Client.Username ==  player.Client.Username).Score += 3;
+            }else if(action == "attack")
+            {
+                activeGame.Players.Find(x => x.Client.Username == player.Client.Username).Score += 10;
+            }
+            else if(action == "killed")
+            {
+                activeGame.Players.Find(x => x.Client.Username == player.Client.Username).Score += 20;
+            }
+            else if(action == "dead")
+            {
+                int score = activeGame.Players.Find(x => x.Client.Username == player.Client.Username).Score;
+                if(score<=10) activeGame.Players.Find(x => x.Client.Username == player.Client.Username).Score = 0;
+                else activeGame.Players.Find(x => x.Client.Username == player.Client.Username).Score -= 10;
+            }
+            Store.SetGame(activeGame);
         }
 
     }

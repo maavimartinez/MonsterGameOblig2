@@ -24,6 +24,9 @@ namespace Business
         List<Player> GetAllPlayers();
         void SetAllPlayers(List<Player> players);
 
+        List<RankingItem> GetRanking();
+        void SetRanking(List<RankingItem> ranking);
+
         Player GetLoggedPlayer(string username);
     }
 }
