@@ -19,14 +19,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:2020/WebServices/CRUDClientService/" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:2020/WebServices/CRUDClientService/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="dd6361d3-8fb8-471b-9c91-6c392d4d6296" SourceId="1" SourceUrl="http://localhost:2020/WebServices/CRUDClientService/?xsd=xsd1" />
-    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="9f5589e2-deea-413b-a0b0-c90eb119a198" SourceId="1" SourceUrl="http://localhost:2020/WebServices/CRUDClientService/?disco" />
-    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="c9ed55b0-4ec9-49eb-8000-f5f0c5cceac5" SourceId="1" SourceUrl="http://localhost:2020/WebServices/CRUDClientService/?xsd=xsd0" />
-    <MetadataFile FileName="CRUDClientService.wsdl" MetadataType="Wsdl" ID="dd4f1e9c-1bbf-4f23-b02c-6e0430e00ad8" SourceId="1" SourceUrl="http://localhost:2020/WebServices/CRUDClientService/?wsdl" />
-    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="5e70a026-f4fe-4de0-9b23-f9e33b61ac69" SourceId="1" SourceUrl="http://localhost:2020/WebServices/CRUDClientService/?xsd=xsd2" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="d7731e7a-4eff-4d39-b2b7-983fcc4c8976" SourceId="1" SourceUrl="http://localhost:2020/WebServices/CRUDClientService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="48c9379e-d415-455d-beb4-7c64a7df7227" SourceId="1" SourceUrl="http://localhost:2020/WebServices/CRUDClientService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="bd55f2c4-fc09-4f90-b0e0-cc8f0ed0990e" SourceId="1" SourceUrl="http://localhost:2020/WebServices/CRUDClientService/mex" />
+    <MetadataFile FileName="Business.xsd" MetadataType="Schema" ID="c91f7e15-9c3a-408c-8227-ffb896063446" SourceId="1" SourceUrl="http://localhost:2020/WebServices/CRUDClientService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
