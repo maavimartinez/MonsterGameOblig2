@@ -20,12 +20,22 @@ namespace GameServer
             (
                 new ResultEntry()
                 {
-                    Result = result,
+                    Result = PrepareResult(result),
                     Timestamp = DateTime.Now
                 }
             );
 
             logger.LogAction(resultEntry);
+        }
+
+        private string PrepareResult(List<string> result)
+        {
+            string ret = "";
+            foreach (string s in result)
+            {
+                ret += s + Environment.NewLine;
+            }
+            return ret;
         }
 
     }

@@ -393,6 +393,8 @@ namespace Business
        public void AddLogEntry(LogEntry entry)
         {
             Store.AddLogEntry(entry);
+            LogEntry aux = Store.GetLastLogEntry();
+            string a = aux.Text;
         }
 
         public LogEntry GetLastLogEntry()
