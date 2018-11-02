@@ -16,7 +16,7 @@
         SendPicturePart,
         SendLastPicturePart,
         CheckIfGameHasFinished,
-        GetResultByTimesOut
+        GetResultByTimesOut,
     }
 
 }
