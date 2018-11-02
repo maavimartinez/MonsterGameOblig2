@@ -2,6 +2,7 @@
 using Business;
 using Business.Log;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GameServer
 {
@@ -20,22 +21,13 @@ namespace GameServer
             (
                 new ResultEntry()
                 {
-                    Result = PrepareResult(result),
+                    Result = LogHelper.ExtractResult(result),
+                    Players = LogHelper.ExtractPlayers(result),
                     Timestamp = DateTime.Now
                 }
             );
 
             logger.LogAction(resultEntry);
-        }
-
-        private string PrepareResult(List<string> result)
-        {
-            string ret = "";
-            foreach (string s in result)
-            {
-                ret += s + Environment.NewLine;
-            }
-            return ret;
         }
 
     }

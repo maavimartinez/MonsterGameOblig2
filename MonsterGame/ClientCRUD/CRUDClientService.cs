@@ -38,6 +38,9 @@ namespace CRUDClient
                 case 3:
                     DeleteClient();
                     break;
+                case 4:
+                    PrintLog();
+                    break;
                 default:
                     Environment.Exit(0);
                     return;
@@ -110,6 +113,24 @@ namespace CRUDClient
                     Console.WriteLine("\nUsername taken");
             }
         }
+
+        private void PrintLog()
+        {
+            LogEntry lastLog = crudServiceClient.GetLastLog();
+            if (lastLog == null)
+            {
+                Console.WriteLine(lastLog);
+            }
+            else
+            {
+                Console.WriteLine("There hasn't been a game yet.");
+
+            }
+            Console.WriteLine("-------------------");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+        }
+
 
         private ClientCredentials AskNewClientInfo()
         {

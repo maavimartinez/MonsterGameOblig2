@@ -24,6 +24,10 @@ namespace Business
         List<Player> GetAllPlayers();
         void SetAllPlayers(List<Player> players);
 
+        List<string> GetOriginalPlayers();
+        void AddOriginalPlayer(string playerUsername);
+        void ResetOriginalPlayers();
+
         List<RankingItem> GetRanking();
         void SetRanking(List<RankingItem> ranking);
 

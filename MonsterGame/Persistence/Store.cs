@@ -14,6 +14,8 @@ namespace Persistence
         public List<RankingItem> Ranking { get; set; }
         public List<StatisticItem> Statistics { get; set; }
         public Game ActiveGame { get; set; }
+        private List<string> OriginalPlayers { get; set; }
+
         public Board Board { get; set; }
 
         private readonly object messagesLocker = new object();
@@ -30,6 +32,7 @@ namespace Persistence
             Ranking = new List<RankingItem>();
             Statistics = new List<StatisticItem>();
             LogEntries = new List<LogEntry>();
+            OriginalPlayers = new List<string>();
         }
 
         public bool ClientExists(Client client)
@@ -95,6 +98,21 @@ namespace Persistence
         public List<Player> GetAllPlayers()
         {
             return this.AllPlayers;
+        }
+
+        public List<string> GetOriginalPlayers()
+        {
+            return this.OriginalPlayers;
+        }
+
+        public void AddOriginalPlayer(string playerUsername)
+        {
+            OriginalPlayers.Add(playerUsername);
+        }
+
+        public void ResetOriginalPlayers()
+        {
+            OriginalPlayers.Clear();
         }
 
         public void SetAllPlayers(List<Player> allPlayers)

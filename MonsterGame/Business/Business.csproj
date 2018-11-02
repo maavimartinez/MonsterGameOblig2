@@ -65,6 +65,7 @@
     <Compile Include="Log\LogEntry.cs" />
     <Compile Include="Log\LogEntryAttributes.cs" />
     <Compile Include="Log\Logger.cs" />
+    <Compile Include="Log\LogHelper.cs" />
     <Compile Include="Log\QueueSettings.cs" />
     <Compile Include="Log\ResultEntry.cs" />
     <Compile Include="Log\Utilities.cs" />

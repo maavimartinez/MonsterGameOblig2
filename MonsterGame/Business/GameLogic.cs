@@ -127,6 +127,8 @@ namespace Business
             if (logged == null) throw new RoleNotChosenException();
             InitializeGame();
             PlayerLogic.JoinPlayerToGame(logged);
+            Store.AddOriginalPlayer("Player: "+usernameFrom);
+
         }
 
         public List<string> DoAction(string usernameFrom, string action)
@@ -257,7 +259,9 @@ namespace Business
                 List<string> ret = new List<string>();
                 ret.Add("FINISHED");
                 ret.Add(ActiveGameResult.ToUpper());
+                ret = ret.Concat(Store.GetOriginalPlayers()).ToList();
                 Store.SetGame(activeGame);
+                Store.ResetOriginalPlayers();
                 UpdateRanking();
                 return ret;
             }
@@ -393,8 +397,7 @@ namespace Business
        public void AddLogEntry(LogEntry entry)
         {
             Store.AddLogEntry(entry);
-            LogEntry aux = Store.GetLastLogEntry();
-            string a = aux.Text;
+
         }
 
         public LogEntry GetLastLogEntry()

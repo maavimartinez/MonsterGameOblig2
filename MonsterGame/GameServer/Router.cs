@@ -102,8 +102,6 @@ namespace GameServer
                         goto End;
                     }
                     logRouter.LogResult(responseMessage);
-
-                    //Console.WriteLine(responseMessage[i + 1]);
                 }
             }
             End:;

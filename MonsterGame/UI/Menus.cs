@@ -62,6 +62,7 @@ namespace UI
                 "Create",
                 "Update",
                 "Delete",
+                "Print log",
                 "Exit"
             });
             for (var i = 0; i < options.Count; i++)

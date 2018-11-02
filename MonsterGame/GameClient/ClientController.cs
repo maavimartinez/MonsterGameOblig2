@@ -516,6 +516,7 @@ namespace GameClient
                     }
                     if (timesOut2) Console.WriteLine("Active Game's time is over!. You can now join a new game.");
                     if (!timesOut2) Console.WriteLine("Game is over! ");
+                    if(!responseMessage[i + 1].Contains("Player:"))
                     Console.WriteLine(responseMessage[i + 1]);
                     exitGame = true;
                     timesOut = true;

@@ -41,6 +41,13 @@ namespace WebServices
             return credentials;
         }
 
+        public LogEntry GetLastLog()
+        {
+            LogEntry lastGameLog = gameLogic.GetLastLogEntry();
+
+            return lastGameLog;
+        }
+
         public bool UpdateClient(ClientCredentials oldCredentials, ClientCredentials newCredentials)
         {
             Client old = Converter.ClientCredentialsToClient(oldCredentials);
