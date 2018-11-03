@@ -8,6 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Business;
+using Entities;
+using System.Collections.Generic;
+
 namespace CRUDClient.WebServices {
     
     
@@ -32,7 +36,19 @@ namespace CRUDClient.WebServices {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICRUDClientService/DeleteClient", ReplyAction="http://tempuri.org/ICRUDClientService/DeleteClientResponse")]
         System.Threading.Tasks.Task<bool> DeleteClientAsync(Business.ClientCredentials client);
-        
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/ICRUDClientService/GetLastLog", ReplyAction = "http://tempuri.org/ICRUDClientService/GetLastLogResponse")]
+        LogEntry GetLastLog();
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/ICRUDClientService/GetLastLog", ReplyAction = "http://tempuri.org/ICRUDClientService/GetLastLogResponse")]
+        System.Threading.Tasks.Task<LogEntry> GetLastLogAsync();
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/ICRUDClientService/GetRanking", ReplyAction = "http://tempuri.org/ICRUDClientService/GetRankingResponse")]
+        Entities.RankingItem[] GetRanking();
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/ICRUDClientService/GetRanking", ReplyAction = "http://tempuri.org/ICRUDClientService/GetRankingResponse")]
+        System.Threading.Tasks.Task<Entities.RankingItem[]> GetRankingAsync();
+
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICRUDClientService/GetClients", ReplyAction="http://tempuri.org/ICRUDClientService/GetClientsResponse")]
         Business.ClientCredentials[] GetClients();
         
@@ -90,7 +106,27 @@ namespace CRUDClient.WebServices {
         public System.Threading.Tasks.Task<bool> DeleteClientAsync(Business.ClientCredentials client) {
             return base.Channel.DeleteClientAsync(client);
         }
-        
+
+        public LogEntry GetLastLog(){
+            return base.Channel.GetLastLog();
+        }
+
+        public System.Threading.Tasks.Task<LogEntry> GetLastLogAsync()
+        {
+            return base.Channel.GetLastLogAsync();
+        }
+
+        public Entities.RankingItem[] GetRanking()
+        {
+            return base.Channel.GetRanking();
+        }
+
+        public System.Threading.Tasks.Task<Entities.RankingItem[]> GetRankingAsync()
+        {
+            return base.Channel.GetRankingAsync();
+        }
+
+
         public Business.ClientCredentials[] GetClients() {
             return base.Channel.GetClients();
         }

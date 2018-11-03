@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
 using Business;
+using Entities;
+using System.Runtime.Serialization;
 
 namespace WebServices
 {
@@ -18,5 +20,12 @@ namespace WebServices
 
         [OperationContract]
         List<ClientCredentials> GetClients();
+
+        [OperationContract]
+        LogEntry GetLastLog();
+
+        [OperationContract]
+        List<RankingItem> GetRanking();
+
     }
 }

@@ -55,7 +55,7 @@ namespace UI
         public static int CRUDClientMenu()
         {
             Console.WriteLine("+----------------------------+");
-            Console.WriteLine("|        CRUD CLIENT         |");
+            Console.WriteLine("|        ADMIN CLIENT        |");
             Console.WriteLine("+----------------------------+");
             List<string> options = new List<string>(new[]
             {
@@ -63,6 +63,7 @@ namespace UI
                 "Update",
                 "Delete",
                 "Print log",
+                "Show Ranking",
                 "Exit"
             });
             for (var i = 0; i < options.Count; i++)

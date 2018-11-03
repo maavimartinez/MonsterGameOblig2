@@ -48,6 +48,15 @@ namespace WebServices
             return lastGameLog;
         }
 
+        public List<RankingItem> GetRanking()
+        {
+            List<RankingItem> ranking = new List<RankingItem>();
+
+            ranking = Converter.SerializeRanking(gameLogic.Ranking());
+
+            return ranking;
+        }
+
         public bool UpdateClient(ClientCredentials oldCredentials, ClientCredentials newCredentials)
         {
             Client old = Converter.ClientCredentialsToClient(oldCredentials);

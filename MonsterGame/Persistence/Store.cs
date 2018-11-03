@@ -11,7 +11,7 @@ namespace Persistence
         private List<Client> Clients { get; set; }
         public List<Player> AllPlayers { get; set; }
         private List<LogEntry> LogEntries { get; set; }
-        public List<RankingItem> Ranking { get; set; }
+        public List<Ranking> Ranking { get; set; }
         public List<StatisticItem> Statistics { get; set; }
         public Game ActiveGame { get; set; }
         private List<string> OriginalPlayers { get; set; }
@@ -29,7 +29,7 @@ namespace Persistence
         {
             Clients = new List<Client>();
             AllPlayers = new List<Player>();
-            Ranking = new List<RankingItem>();
+            Ranking = new List<Ranking>();
             Statistics = new List<StatisticItem>();
             LogEntries = new List<LogEntry>();
             OriginalPlayers = new List<string>();
@@ -164,12 +164,12 @@ namespace Persistence
             }
         }
 
-        public List<RankingItem> GetRanking()
+        public List<Ranking> GetRanking()
         {
-            return this.Ranking.OrderByDescending(x=>x.Score).ToList();
+            return this.Ranking.OrderByDescending(x=>x.Score).Take(10).ToList();
         }
 
-        public void SetRanking(List<RankingItem> newRanking)
+        public void SetRanking(List<Ranking> newRanking)
         {
             this.Ranking = newRanking;
         }
@@ -204,7 +204,9 @@ namespace Persistence
         {
             lock (logLocker)
             {
+                if(LogEntries.Count>0)
                 return LogEntries.Last();
+                return null;
             }
         }
     }

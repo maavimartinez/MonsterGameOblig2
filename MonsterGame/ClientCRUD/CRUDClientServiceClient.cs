@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UI;
 using Business;
+using Entities;
 
 namespace CRUDClient
 {
@@ -39,6 +40,9 @@ namespace CRUDClient
                     break;
                 case 4:
                     PrintLog();
+                    break;
+                case 5:
+                    Ranking();
                     break;
                 default:
                     Environment.Exit(0);
@@ -115,8 +119,8 @@ namespace CRUDClient
 
         private void PrintLog()
         {
-            /*LogEntry lastLog = crudServiceClient.GetLastLog();
-            if (lastLog == null)
+            LogEntry lastLog = crudServiceClient.GetLastLog();
+            if (lastLog != null)
             {
                 Console.WriteLine(lastLog);
             }
@@ -124,12 +128,31 @@ namespace CRUDClient
             {
                 Console.WriteLine("There hasn't been a game yet.");
 
-            }*/
+            }
             Console.WriteLine("-------------------");
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
         }
 
+        private void Ranking()
+        {
+            List<RankingItem> ranking = crudServiceClient.GetRanking().ToList();
+            if (ranking!=null && ranking.Count > 0)
+            {
+                foreach(RankingItem ri in ranking)
+                {
+                    Console.WriteLine(ri.ToString());
+                }
+            }
+            else
+            {
+                Console.WriteLine("No ranking available.");
+
+            }
+            Console.WriteLine("-------------------");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+        }
 
         private ClientCredentials AskNewClientInfo()
         {

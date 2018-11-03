@@ -1,5 +1,6 @@
 ﻿using Business;
 using Entities;
+using System.Collections.Generic;
 
 namespace WebServices
 {
@@ -17,6 +18,21 @@ namespace WebServices
                 Username = client.Username,
                 Password = client.Password
             };
+        }
+
+        public static List<RankingItem> SerializeRanking(List<Ranking> ranking)
+        {
+            List<RankingItem> ret = new List<RankingItem>();
+            foreach (Ranking r in ranking)
+            {
+                RankingItem ri = new RankingItem();
+                ri.GameDate = r.GameDate.ToString();
+                ri.Role = r.Role;
+                ri.Score = r.Score;
+                ri.Username = r.Username;
+                ret.Add(ri);
+            }
+            return ret;
         }
     }
 }
