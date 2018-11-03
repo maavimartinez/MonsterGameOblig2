@@ -14,17 +14,17 @@ namespace Entities
         public string Username { get; set; }
 
         [DataMember]
-        public int Score { get; set; }
+        public string Score { get; set; }
 
         [DataMember]
         public string GameDate { get; set; }
 
         [DataMember]
-        public Type Role { get; set; }
+        public string Role { get; set; }
 
         public override string ToString()
         {
-            return $"Player: {Username} played as {Role} on .{Environment.NewLine}  - Score: {Score}";
+            return $"Player: {Username} played as {Role} on {GameDate}.{Environment.NewLine}  - Score: {Score}";
         }
     }
 }

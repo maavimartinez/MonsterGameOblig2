@@ -1,6 +1,7 @@
 ﻿using Business;
 using Entities;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WebServices
 {
@@ -27,8 +28,8 @@ namespace WebServices
             {
                 RankingItem ri = new RankingItem();
                 ri.GameDate = r.GameDate.ToString();
-                ri.Role = r.Role;
-                ri.Score = r.Score;
+                ri.Role = (r.Role.ToString().Split('.').Last());
+                ri.Score = r.Score.ToString();
                 ri.Username = r.Username;
                 ret.Add(ri);
             }

@@ -14,9 +14,5 @@ namespace Entities
         public string GameDate { get; set; }
         public Type Role { get; set; }
 
-        public override string ToString()
-        {
-            return $"Player: {Username} played as {Role} on {GameDate}.{Environment.NewLine}  - Score: {Score}";
-        }
     }
 }
