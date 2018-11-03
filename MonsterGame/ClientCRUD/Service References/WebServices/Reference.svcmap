@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="49105302-2cbf-4e86-9ee1-08b761749498" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:2020/WebServices/CRUDClientService/" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="1351aa53-8c40-4315-8f3c-7130d5d255ff" SourceId="1" SourceUrl="http://localhost:2020/WebServices/CRUDClientService/?xsd=xsd1" />
+    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="962010a3-5365-4e1c-a05b-1d0571b61c5b" SourceId="1" SourceUrl="http://localhost:2020/WebServices/CRUDClientService/?disco" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="a9946cf2-4489-4803-a05c-2367fd201340" SourceId="1" SourceUrl="http://localhost:2020/WebServices/CRUDClientService/?xsd=xsd0" />
+    <MetadataFile FileName="CRUDClientService.wsdl" MetadataType="Wsdl" ID="5be44c4f-8a69-4ebe-b184-67955ed34350" SourceId="1" SourceUrl="http://localhost:2020/WebServices/CRUDClientService/?wsdl" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="c13eea6f-fa82-4677-a84e-1232adf4779d" SourceId="1" SourceUrl="http://localhost:2020/WebServices/CRUDClientService/?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

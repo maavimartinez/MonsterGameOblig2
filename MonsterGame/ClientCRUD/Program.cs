@@ -1,11 +1,12 @@
 ﻿using System;
+
 namespace CRUDClient
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var crudClientService = new CRUDClientService();
+            var crudClientService = new CRUDClientServiceClient();
 
             while (true)
             {

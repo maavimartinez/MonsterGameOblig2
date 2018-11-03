@@ -45,10 +45,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CRUDClientService.cs" />
+    <Compile Include="CRUDClientServiceClient.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\ServiceReference1\Reference.cs">
+    <Compile Include="Service References\WebServices\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -59,14 +59,14 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\DataSources\Business.ClientCredentials.datasource" />
-    <None Include="Service References\ServiceReference1\Business.xsd">
+    <None Include="Service References\WebServices\CRUDClientService.wsdl" />
+    <None Include="Service References\WebServices\item.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference1\service.wsdl" />
-    <None Include="Service References\ServiceReference1\service.xsd">
+    <None Include="Service References\WebServices\item1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceReference1\service1.xsd">
+    <None Include="Service References\WebServices\item2.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -79,25 +79,24 @@
       <Project>{6458c1c9-1f78-49d4-80b4-16627a0f0669}</Project>
       <Name>UI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WebServices\WebServices.csproj">
-      <Project>{63c6ca36-7950-4a9a-9574-67f0cdeb0761}</Project>
-      <Name>WebServices</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\ServiceReference1\" />
+    <WCFMetadataStorage Include="Service References\WebServices\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\ServiceReference1\configuration91.svcinfo" />
+    <None Include="Service References\WebServices\item.disco" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\ServiceReference1\configuration.svcinfo" />
+    <None Include="Service References\WebServices\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\ServiceReference1\Reference.svcmap">
+    <None Include="Service References\WebServices\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\WebServices\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using UI;
 using Business;
-using WebServices;
 
 namespace CRUDClient
 {
-    public class CRUDClientService
+    public class CRUDClientServiceClient
     {
         private const string NoClientsMessage = "There are no clients...";
 
-        private WebServices.CRUDClientService crudServiceClient;
+        private WebServices.CRUDClientServiceClient crudServiceClient;
 
-        public CRUDClientService()
+        public CRUDClientServiceClient()
         {
-            crudServiceClient = new WebServices.CRUDClientService();
+            crudServiceClient = new WebServices.CRUDClientServiceClient();
         }
 
         public void Menu()
@@ -116,7 +115,7 @@ namespace CRUDClient
 
         private void PrintLog()
         {
-            LogEntry lastLog = crudServiceClient.GetLastLog();
+            /*LogEntry lastLog = crudServiceClient.GetLastLog();
             if (lastLog == null)
             {
                 Console.WriteLine(lastLog);
@@ -125,7 +124,7 @@ namespace CRUDClient
             {
                 Console.WriteLine("There hasn't been a game yet.");
 
-            }
+            }*/
             Console.WriteLine("-------------------");
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();

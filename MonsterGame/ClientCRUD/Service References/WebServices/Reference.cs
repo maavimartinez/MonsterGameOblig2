@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ClientCRUD.ServiceReference1 {
+namespace CRUDClient.WebServices {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.ICRUDClientService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="WebServices.ICRUDClientService")]
     public interface ICRUDClientService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICRUDClientService/CreateClient", ReplyAction="http://tempuri.org/ICRUDClientService/CreateClientResponse")]
@@ -41,12 +41,12 @@ namespace ClientCRUD.ServiceReference1 {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ICRUDClientServiceChannel : ClientCRUD.ServiceReference1.ICRUDClientService, System.ServiceModel.IClientChannel {
+    public interface ICRUDClientServiceChannel : CRUDClient.WebServices.ICRUDClientService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class CRUDClientServiceClient : System.ServiceModel.ClientBase<ClientCRUD.ServiceReference1.ICRUDClientService>, ClientCRUD.ServiceReference1.ICRUDClientService {
+    public partial class CRUDClientServiceClient : System.ServiceModel.ClientBase<CRUDClient.WebServices.ICRUDClientService>, CRUDClient.WebServices.ICRUDClientService {
         
         public CRUDClientServiceClient() {
         }
