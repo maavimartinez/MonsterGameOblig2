@@ -49,6 +49,12 @@ namespace CRUDClient.WebServices {
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/ICRUDClientService/GetRanking", ReplyAction = "http://tempuri.org/ICRUDClientService/GetRankingResponse")]
         System.Threading.Tasks.Task<Entities.RankingCredentials[]> GetRankingAsync();
 
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/ICRUDClientService/GetStatistics", ReplyAction = "http://tempuri.org/ICRUDClientService/GetStatisticsResponse")]
+        Entities.StatisticCredentials[] GetStatistics();
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/ICRUDClientService/GetStatistics", ReplyAction = "http://tempuri.org/ICRUDClientService/GetStatisticsResponse")]
+        System.Threading.Tasks.Task<Entities.StatisticCredentials[]> GetStatisticsAsync();
+
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICRUDClientService/GetClients", ReplyAction="http://tempuri.org/ICRUDClientService/GetClientsResponse")]
         Business.ClientCredentials[] GetClients();
         
@@ -124,6 +130,16 @@ namespace CRUDClient.WebServices {
         public System.Threading.Tasks.Task<Entities.RankingCredentials[]> GetRankingAsync()
         {
             return base.Channel.GetRankingAsync();
+        }
+
+        public Entities.StatisticCredentials[] GetStatistics()
+        {
+            return base.Channel.GetStatistics();
+        }
+
+        public System.Threading.Tasks.Task<Entities.StatisticCredentials[]> GetStatisticsAsync()
+        {
+            return base.Channel.GetStatisticsAsync();
         }
 
 

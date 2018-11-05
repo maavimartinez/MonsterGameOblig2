@@ -254,6 +254,7 @@ namespace GameServer
 
         public List<string> GetResultByTimesOut(Connection connection, Request request)
         {
+
             List<string> timesOut = new List<string>();
             try
             {

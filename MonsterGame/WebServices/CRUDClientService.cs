@@ -57,6 +57,15 @@ namespace WebServices
             return ranking;
         }
 
+        public List<StatisticCredentials> GetStatistics()
+        {
+            List<StatisticCredentials> statistics = new List<StatisticCredentials>();
+
+            statistics = gameLogic.Statistics();
+
+            return statistics;
+        }
+
         public bool UpdateClient(ClientCredentials oldCredentials, ClientCredentials newCredentials)
         {
             Client old = Converter.ClientCredentialsToClient(oldCredentials);

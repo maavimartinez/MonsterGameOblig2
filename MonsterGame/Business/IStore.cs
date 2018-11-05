@@ -31,8 +31,8 @@ namespace Business
         List<Ranking> GetRanking();
         void SetRanking(List<Ranking> ranking);
 
-        List<StatisticItem> GetStatistics();
-        void SetStatistics(List<StatisticItem> statistics);
+        List<StatisticCredentials> GetStatistics();
+        void SetStatistics(List<StatisticCredentials> statistics);
 
         Player GetLoggedPlayer(string username);
 

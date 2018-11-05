@@ -64,6 +64,7 @@ namespace UI
                 "Delete",
                 "Print log",
                 "Show Ranking",
+                "Show Statistics",
                 "Exit"
             });
             for (var i = 0; i < options.Count; i++)

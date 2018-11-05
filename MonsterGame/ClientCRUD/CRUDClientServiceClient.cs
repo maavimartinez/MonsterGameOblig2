@@ -44,6 +44,9 @@ namespace CRUDClient
                 case 5:
                     Ranking();
                     break;
+                case 6:
+                    Statistics();
+                    break;
                 default:
                     Environment.Exit(0);
                     return;
@@ -147,6 +150,26 @@ namespace CRUDClient
             else
             {
                 Console.WriteLine("No ranking available.");
+
+            }
+            Console.WriteLine("-------------------");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+        }
+
+        private void Statistics()
+        {
+            List<StatisticCredentials> statistics = crudServiceClient.GetStatistics().ToList();
+            if (statistics != null && statistics.Count > 0)
+            {
+                foreach (StatisticCredentials st in statistics)
+                {
+                    Console.WriteLine(st.ToString());
+                }
+            }
+            else
+            {
+                Console.WriteLine("No statistics available.");
 
             }
             Console.WriteLine("-------------------");

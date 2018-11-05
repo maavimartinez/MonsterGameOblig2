@@ -52,7 +52,7 @@
     <Compile Include="Server.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="StatisticDetail.cs" />
-    <Compile Include="StatisticItem.cs" />
+    <Compile Include="StatisticCredentials.cs" />
     <Compile Include="Survivor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

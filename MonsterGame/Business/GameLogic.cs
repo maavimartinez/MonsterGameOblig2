@@ -19,7 +19,7 @@ namespace Business
         private Board board { get; set; }
         private List<Player> allPlayers { get; set; }
         private List<Ranking> ranking { get; set; }
-        private List<StatisticItem> statistics { get; set; }
+        private List<StatisticCredentials> statistics { get; set; }
 
         public GameLogic(IStore store)
         {
@@ -327,6 +327,11 @@ namespace Business
             return Store.GetRanking();
         }
 
+        public List<StatisticCredentials> Statistics()
+        {
+            return Store.GetStatistics();
+        }
+
         public string GetGameResult()
         {
             if (ActiveGameResult != "")
@@ -435,7 +440,8 @@ namespace Business
             activeGame = Store.GetGame();
             statistics = Store.GetStatistics();
             if (statistics.Count == 10) statistics.RemoveAt(0);
-            StatisticItem gameSt = new StatisticItem();
+            StatisticCredentials gameSt = new StatisticCredentials();
+            gameSt.GameDate= DateTime.Now.ToString();
             gameSt.gameStatistic = new List<StatisticDetail>();
             if (winners.Equals("Nobody won :("))
             {

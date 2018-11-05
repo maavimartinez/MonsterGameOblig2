@@ -27,5 +27,8 @@ namespace WebServices
         [OperationContract]
         List<RankingCredentials> GetRanking();
 
+        [OperationContract]
+        List<StatisticCredentials> GetStatistics();
+
     }
 }

@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionLogic.cs" />
-    <Compile Include="ClientCredentials.cs" />
+    <Compile Include="DTO\ClientCredentials.cs" />
     <Compile Include="CRUDClientLogic.cs" />
     <Compile Include="Exceptions\ActionException.cs" />
     <Compile Include="Exceptions\CellAlreadyContainsAPlayer.cs" />
@@ -72,7 +72,7 @@
     <Compile Include="MainController.cs" />
     <Compile Include="PlayerLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RankingCredentials.cs" />
+    <Compile Include="DTO\RankingCredentials.cs" />
     <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>

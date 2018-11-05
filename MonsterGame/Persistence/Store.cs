@@ -12,7 +12,7 @@ namespace Persistence
         public List<Player> AllPlayers { get; set; }
         private List<LogEntry> LogEntries { get; set; }
         public List<Ranking> Ranking { get; set; }
-        public List<StatisticItem> Statistics { get; set; }
+        public List<StatisticCredentials> Statistics { get; set; }
         public Game ActiveGame { get; set; }
         private List<string> OriginalPlayers { get; set; }
 
@@ -30,7 +30,7 @@ namespace Persistence
             Clients = new List<Client>();
             AllPlayers = new List<Player>();
             Ranking = new List<Ranking>();
-            Statistics = new List<StatisticItem>();
+            Statistics = new List<StatisticCredentials>();
             LogEntries = new List<LogEntry>();
             OriginalPlayers = new List<string>();
         }
@@ -174,12 +174,12 @@ namespace Persistence
             this.Ranking = newRanking;
         }
 
-        public List<StatisticItem> GetStatistics()
+        public List<StatisticCredentials> GetStatistics()
         {
             return this.Statistics;
         }
 
-        public void SetStatistics(List<StatisticItem> statistics)
+        public void SetStatistics(List<StatisticCredentials> statistics)
         {
             this.Statistics = statistics;
         }
