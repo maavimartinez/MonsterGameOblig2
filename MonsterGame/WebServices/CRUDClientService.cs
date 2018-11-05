@@ -14,27 +14,27 @@ namespace WebServices
             gameLogic = MainController.GameLogicInstance();
         }
 
-        public bool CreateClient(ClientCredentials credentials)
+        public bool CreateClient(ClientDTO credentials)
         {
-            Client client = Converter.ClientCredentialsToClient(credentials);
+            Client client = Converter.ClientDTOToClient(credentials);
 
             bool result = gameLogic.CreateClient(client);
 
             return result;
         }
 
-        public bool DeleteClient(ClientCredentials credentials)
+        public bool DeleteClient(ClientDTO credentials)
         {
-            Client client = Converter.ClientCredentialsToClient(credentials);
+            Client client = Converter.ClientDTOToClient(credentials);
 
             bool result = gameLogic.DeleteClient(client);
 
             return result;
         }
 
-        public List<ClientCredentials> GetClients()
+        public List<ClientDTO> GetClients()
         {
-            List<ClientCredentials> credentials = new List<ClientCredentials>();
+            List<ClientDTO> credentials = new List<ClientDTO>();
 
             gameLogic.GetClients().ForEach(c => credentials.Add(Converter.ClientToCredentials(c)));
 
@@ -52,7 +52,7 @@ namespace WebServices
         {
             List<RankingCredentials> ranking = new List<RankingCredentials>();
 
-            ranking = Converter.SerializeRanking(gameLogic.Ranking());
+            ranking = gameLogic.Ranking();
 
             return ranking;
         }
@@ -66,10 +66,10 @@ namespace WebServices
             return statistics;
         }
 
-        public bool UpdateClient(ClientCredentials oldCredentials, ClientCredentials newCredentials)
+        public bool UpdateClient(ClientDTO oldCredentials, ClientDTO newCredentials)
         {
-            Client old = Converter.ClientCredentialsToClient(oldCredentials);
-            Client newC = Converter.ClientCredentialsToClient(newCredentials);
+            Client old = Converter.ClientDTOToClient(oldCredentials);
+            Client newC = Converter.ClientDTOToClient(newCredentials);
 
             bool result = gameLogic.UpdateClient(old, newC);
 

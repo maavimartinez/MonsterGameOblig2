@@ -20,22 +20,22 @@ namespace CRUDClient.WebServices {
     public interface ICRUDClientService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICRUDClientService/CreateClient", ReplyAction="http://tempuri.org/ICRUDClientService/CreateClientResponse")]
-        bool CreateClient(Business.ClientCredentials client);
+        bool CreateClient(Business.ClientDTO client);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICRUDClientService/CreateClient", ReplyAction="http://tempuri.org/ICRUDClientService/CreateClientResponse")]
-        System.Threading.Tasks.Task<bool> CreateClientAsync(Business.ClientCredentials client);
+        System.Threading.Tasks.Task<bool> CreateClientAsync(Business.ClientDTO client);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICRUDClientService/UpdateClient", ReplyAction="http://tempuri.org/ICRUDClientService/UpdateClientResponse")]
-        bool UpdateClient(Business.ClientCredentials old, Business.ClientCredentials newC);
+        bool UpdateClient(Business.ClientDTO old, Business.ClientDTO newC);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICRUDClientService/UpdateClient", ReplyAction="http://tempuri.org/ICRUDClientService/UpdateClientResponse")]
-        System.Threading.Tasks.Task<bool> UpdateClientAsync(Business.ClientCredentials old, Business.ClientCredentials newC);
+        System.Threading.Tasks.Task<bool> UpdateClientAsync(Business.ClientDTO old, Business.ClientDTO newC);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICRUDClientService/DeleteClient", ReplyAction="http://tempuri.org/ICRUDClientService/DeleteClientResponse")]
-        bool DeleteClient(Business.ClientCredentials client);
+        bool DeleteClient(Business.ClientDTO client);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICRUDClientService/DeleteClient", ReplyAction="http://tempuri.org/ICRUDClientService/DeleteClientResponse")]
-        System.Threading.Tasks.Task<bool> DeleteClientAsync(Business.ClientCredentials client);
+        System.Threading.Tasks.Task<bool> DeleteClientAsync(Business.ClientDTO client);
 
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/ICRUDClientService/GetLastLog", ReplyAction = "http://tempuri.org/ICRUDClientService/GetLastLogResponse")]
         LogEntry GetLastLog();
@@ -56,10 +56,10 @@ namespace CRUDClient.WebServices {
         System.Threading.Tasks.Task<Entities.StatisticCredentials[]> GetStatisticsAsync();
 
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICRUDClientService/GetClients", ReplyAction="http://tempuri.org/ICRUDClientService/GetClientsResponse")]
-        Business.ClientCredentials[] GetClients();
+        Business.ClientDTO[] GetClients();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICRUDClientService/GetClients", ReplyAction="http://tempuri.org/ICRUDClientService/GetClientsResponse")]
-        System.Threading.Tasks.Task<Business.ClientCredentials[]> GetClientsAsync();
+        System.Threading.Tasks.Task<Business.ClientDTO[]> GetClientsAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -89,27 +89,27 @@ namespace CRUDClient.WebServices {
                 base(binding, remoteAddress) {
         }
         
-        public bool CreateClient(Business.ClientCredentials client) {
+        public bool CreateClient(Business.ClientDTO client) {
             return base.Channel.CreateClient(client);
         }
         
-        public System.Threading.Tasks.Task<bool> CreateClientAsync(Business.ClientCredentials client) {
+        public System.Threading.Tasks.Task<bool> CreateClientAsync(Business.ClientDTO client) {
             return base.Channel.CreateClientAsync(client);
         }
         
-        public bool UpdateClient(Business.ClientCredentials old, Business.ClientCredentials newC) {
+        public bool UpdateClient(Business.ClientDTO old, Business.ClientDTO newC) {
             return base.Channel.UpdateClient(old, newC);
         }
         
-        public System.Threading.Tasks.Task<bool> UpdateClientAsync(Business.ClientCredentials old, Business.ClientCredentials newC) {
+        public System.Threading.Tasks.Task<bool> UpdateClientAsync(Business.ClientDTO old, Business.ClientDTO newC) {
             return base.Channel.UpdateClientAsync(old, newC);
         }
         
-        public bool DeleteClient(Business.ClientCredentials client) {
+        public bool DeleteClient(Business.ClientDTO client) {
             return base.Channel.DeleteClient(client);
         }
         
-        public System.Threading.Tasks.Task<bool> DeleteClientAsync(Business.ClientCredentials client) {
+        public System.Threading.Tasks.Task<bool> DeleteClientAsync(Business.ClientDTO client) {
             return base.Channel.DeleteClientAsync(client);
         }
 
@@ -143,11 +143,11 @@ namespace CRUDClient.WebServices {
         }
 
 
-        public Business.ClientCredentials[] GetClients() {
+        public Business.ClientDTO[] GetClients() {
             return base.Channel.GetClients();
         }
         
-        public System.Threading.Tasks.Task<Business.ClientCredentials[]> GetClientsAsync() {
+        public System.Threading.Tasks.Task<Business.ClientDTO[]> GetClientsAsync() {
             return base.Channel.GetClientsAsync();
         }
     }

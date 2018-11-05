@@ -10,16 +10,16 @@ namespace WebServices
     public interface ICRUDClientService
     {
         [OperationContract]
-        bool CreateClient(ClientCredentials client);
+        bool CreateClient(ClientDTO client);
 
         [OperationContract]
-        bool UpdateClient(ClientCredentials old, ClientCredentials newC);
+        bool UpdateClient(ClientDTO old, ClientDTO newC);
 
         [OperationContract]
-        bool DeleteClient(ClientCredentials client);
+        bool DeleteClient(ClientDTO client);
 
         [OperationContract]
-        List<ClientCredentials> GetClients();
+        List<ClientDTO> GetClients();
 
         [OperationContract]
         LogEntry GetLastLog();

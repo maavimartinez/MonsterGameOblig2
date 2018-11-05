@@ -43,8 +43,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionLogic.cs" />
-    <Compile Include="DTO\ClientCredentials.cs" />
+    <Compile Include="DTO\ClientDTO.cs" />
     <Compile Include="CRUDClientLogic.cs" />
+    <Compile Include="DTO\StatisticCredentials.cs" />
+    <Compile Include="DTO\StatisticDetail.cs" />
     <Compile Include="Exceptions\ActionException.cs" />
     <Compile Include="Exceptions\CellAlreadyContainsAPlayer.cs" />
     <Compile Include="Exceptions\FullGameException.cs" />

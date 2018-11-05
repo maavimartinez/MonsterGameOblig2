@@ -28,8 +28,8 @@ namespace Business
         void AddOriginalPlayer(string playerUsername);
         void ResetOriginalPlayers();
 
-        List<Ranking> GetRanking();
-        void SetRanking(List<Ranking> ranking);
+        List<RankingCredentials> GetRanking();
+        void SetRanking(List<RankingCredentials> ranking);
 
         List<StatisticCredentials> GetStatistics();
         void SetStatistics(List<StatisticCredentials> statistics);

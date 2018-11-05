@@ -4,7 +4,7 @@
   <xs:element name="CreateClient">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Business" minOccurs="0" name="client" nillable="true" type="q1:ClientCredentials" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Business" minOccurs="0" name="client" nillable="true" type="q1:ClientDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -18,8 +18,8 @@
   <xs:element name="UpdateClient">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Business" minOccurs="0" name="old" nillable="true" type="q2:ClientCredentials" />
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Business" minOccurs="0" name="newC" nillable="true" type="q3:ClientCredentials" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Business" minOccurs="0" name="old" nillable="true" type="q2:ClientDTO" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Business" minOccurs="0" name="newC" nillable="true" type="q3:ClientDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -33,7 +33,7 @@
   <xs:element name="DeleteClient">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Business" minOccurs="0" name="client" nillable="true" type="q4:ClientCredentials" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Business" minOccurs="0" name="client" nillable="true" type="q4:ClientDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -52,7 +52,7 @@
   <xs:element name="GetClientsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Business" minOccurs="0" name="GetClientsResult" nillable="true" type="q5:ArrayOfClientCredentials" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Business" minOccurs="0" name="GetClientsResult" nillable="true" type="q5:ArrayOfClientDTO" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -18,7 +18,7 @@ namespace Business
         private Game activeGame { get; set; }
         private Board board { get; set; }
         private List<Player> allPlayers { get; set; }
-        private List<Ranking> ranking { get; set; }
+        private List<RankingCredentials> ranking { get; set; }
         private List<StatisticCredentials> statistics { get; set; }
 
         public GameLogic(IStore store)
@@ -280,13 +280,13 @@ namespace Business
                 {
                     for(int j=0; j<ranking.Count; j++)
                     {
-                        if(pl.Score > ranking.ElementAt(j).Score)
+                        if(pl.Score > Int32.Parse(ranking.ElementAt(j).Score))
                         {
                             ranking.RemoveAt(9);
-                            Ranking ri = new Ranking();
+                            RankingCredentials ri = new RankingCredentials();
                             ri.GameDate = DateTime.Now.ToString();
-                            ri.Role = pl.GetType();
-                            ri.Score = pl.Score;
+                            ri.Role = pl.GetType().ToString();
+                            ri.Score = pl.Score.ToString();
                             ri.Username = pl.Client.Username;
                             ranking.Add(ri);
                             break;
@@ -298,10 +298,10 @@ namespace Business
                 int i = 0;
                 while (ranking.Count < 10 && i < gamePlayers.Count)
                 {
-                    Ranking ri = new Ranking();
+                    RankingCredentials ri = new RankingCredentials();
                     ri.GameDate = DateTime.Now.ToString();
-                    ri.Role = gamePlayers[i].GetType();
-                    ri.Score = gamePlayers[i].Score;
+                    ri.Role = gamePlayers[i].GetType().ToString();
+                    ri.Score = gamePlayers[i].Score.ToString();
                     ri.Username = gamePlayers[i].Client.Username;
                     ranking.Add(ri);
                     i++;
@@ -322,7 +322,7 @@ namespace Business
             Store.SetGame(activeGame);
         }
 
-        public List<Ranking> Ranking()
+        public List<RankingCredentials> Ranking()
         {
             return Store.GetRanking();
         }

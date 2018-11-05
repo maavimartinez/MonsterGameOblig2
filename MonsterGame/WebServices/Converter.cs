@@ -7,34 +7,18 @@ namespace WebServices
 {
     public class Converter
     {
-        public static Client ClientCredentialsToClient(ClientCredentials credentials)
+        public static Client ClientDTOToClient(ClientDTO credentials)
         {
             return new Client(credentials.Username, credentials.Password);
         }
 
-        public static ClientCredentials ClientToCredentials(Client client)
+        public static ClientDTO ClientToCredentials(Client client)
         {
-            return new ClientCredentials()
+            return new ClientDTO()
             {
                 Username = client.Username,
                 Password = client.Password
             };
-        }
-
-
-        public static List<RankingCredentials> SerializeRanking(List<Ranking> ranking)
-        {
-            List<RankingCredentials> ret = new List<RankingCredentials>();
-            foreach (Ranking r in ranking)
-            {
-                RankingCredentials ri = new RankingCredentials();
-                ri.GameDate = r.GameDate.ToString();
-                ri.Role = (r.Role.ToString().Split('.').Last());
-                ri.Score = r.Score.ToString();
-                ri.Username = r.Username;
-                ret.Add(ri);
-            }
-            return ret;
         }
     }
 }

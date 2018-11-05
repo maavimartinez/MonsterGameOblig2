@@ -57,7 +57,7 @@ namespace CRUDClient
         {
             try
             {
-                ClientCredentials clientToDelete = AskExistingClientInfo();
+                ClientDTO clientToDelete = AskExistingClientInfo();
 
                 if (!crudServiceClient.DeleteClient(clientToDelete))
                     Console.WriteLine("Client does not exist or is connected.");
@@ -73,9 +73,9 @@ namespace CRUDClient
         {
             try
             {
-                ClientCredentials existingClient = AskExistingClientInfo();
+                ClientDTO existingClient = AskExistingClientInfo();
 
-                ClientCredentials editedClient = AskNewClientInfo();
+                ClientDTO editedClient = AskNewClientInfo();
 
                 crudServiceClient.UpdateClient(existingClient, editedClient);
             }
@@ -86,9 +86,9 @@ namespace CRUDClient
             }
         }
 
-        private ClientCredentials AskExistingClientInfo()
+        private ClientDTO AskExistingClientInfo()
         {
-            List<ClientCredentials> existingClients = crudServiceClient.GetClients().ToList();
+            List<ClientDTO> existingClients = crudServiceClient.GetClients().ToList();
 
             if (existingClients.Count == 0)
                 throw new IndexOutOfRangeException();
@@ -111,7 +111,7 @@ namespace CRUDClient
 
             while (!created)
             {
-                ClientCredentials clientToCreate = AskNewClientInfo();
+                ClientDTO clientToCreate = AskNewClientInfo();
 
                 created = crudServiceClient.CreateClient(clientToCreate);
 
@@ -177,7 +177,7 @@ namespace CRUDClient
             Console.ReadKey();
         }
 
-        private ClientCredentials AskNewClientInfo()
+        private ClientDTO AskNewClientInfo()
         {
             Console.WriteLine("Insert username:");
             string username = Input.RequestUsernameAndPassword("Insert Username: ");
@@ -185,7 +185,7 @@ namespace CRUDClient
             Console.WriteLine("Insert Password");
             string password = Input.RequestUsernameAndPassword("Insert Password: ");
 
-            return new ClientCredentials()
+            return new ClientDTO()
             {
                 Username = username,
                 Password = password
