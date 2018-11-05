@@ -25,7 +25,7 @@ namespace WebServices
         LogEntry GetLastLog();
 
         [OperationContract]
-        List<RankingItem> GetRanking();
+        List<RankingCredentials> GetRanking();
 
     }
 }

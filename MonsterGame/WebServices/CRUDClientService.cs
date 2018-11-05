@@ -48,9 +48,9 @@ namespace WebServices
             return lastGameLog;
         }
 
-        public List<RankingItem> GetRanking()
+        public List<RankingCredentials> GetRanking()
         {
-            List<RankingItem> ranking = new List<RankingItem>();
+            List<RankingCredentials> ranking = new List<RankingCredentials>();
 
             ranking = Converter.SerializeRanking(gameLogic.Ranking());
 

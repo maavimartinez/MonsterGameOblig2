@@ -21,12 +21,13 @@ namespace WebServices
             };
         }
 
-        public static List<RankingItem> SerializeRanking(List<Ranking> ranking)
+
+        public static List<RankingCredentials> SerializeRanking(List<Ranking> ranking)
         {
-            List<RankingItem> ret = new List<RankingItem>();
+            List<RankingCredentials> ret = new List<RankingCredentials>();
             foreach (Ranking r in ranking)
             {
-                RankingItem ri = new RankingItem();
+                RankingCredentials ri = new RankingCredentials();
                 ri.GameDate = r.GameDate.ToString();
                 ri.Role = (r.Role.ToString().Split('.').Last());
                 ri.Score = r.Score.ToString();

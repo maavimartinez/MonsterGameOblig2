@@ -44,10 +44,10 @@ namespace CRUDClient.WebServices {
         System.Threading.Tasks.Task<LogEntry> GetLastLogAsync();
 
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/ICRUDClientService/GetRanking", ReplyAction = "http://tempuri.org/ICRUDClientService/GetRankingResponse")]
-        Entities.RankingItem[] GetRanking();
+        Entities.RankingCredentials[] GetRanking();
 
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/ICRUDClientService/GetRanking", ReplyAction = "http://tempuri.org/ICRUDClientService/GetRankingResponse")]
-        System.Threading.Tasks.Task<Entities.RankingItem[]> GetRankingAsync();
+        System.Threading.Tasks.Task<Entities.RankingCredentials[]> GetRankingAsync();
 
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICRUDClientService/GetClients", ReplyAction="http://tempuri.org/ICRUDClientService/GetClientsResponse")]
         Business.ClientCredentials[] GetClients();
@@ -116,12 +116,12 @@ namespace CRUDClient.WebServices {
             return base.Channel.GetLastLogAsync();
         }
 
-        public Entities.RankingItem[] GetRanking()
+        public Entities.RankingCredentials[] GetRanking()
         {
             return base.Channel.GetRanking();
         }
 
-        public System.Threading.Tasks.Task<Entities.RankingItem[]> GetRankingAsync()
+        public System.Threading.Tasks.Task<Entities.RankingCredentials[]> GetRankingAsync()
         {
             return base.Channel.GetRankingAsync();
         }

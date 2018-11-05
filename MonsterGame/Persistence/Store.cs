@@ -57,7 +57,7 @@ namespace Persistence
 
         public Player GetLoggedPlayer(string clientUsername)
         {
-            return AllPlayers.Find(p => p.Client.Username.Equals(clientUsername));
+            return AllPlayers.FindLast(p => p.Client.Username.Equals(clientUsername));
         }
 
         public Game GetGame()

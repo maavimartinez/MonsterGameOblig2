@@ -136,12 +136,12 @@ namespace CRUDClient
 
         private void Ranking()
         {
-            List<RankingItem> ranking = crudServiceClient.GetRanking().ToList();
+            List<RankingCredentials> ranking = crudServiceClient.GetRanking().ToList();
             if (ranking!=null && ranking.Count > 0)
             {
-                foreach(RankingItem ri in ranking)
+                foreach(RankingCredentials ri in ranking)
                 {
-                    Console.WriteLine(ri.ToString());
+                    Console.WriteLine(ranking.IndexOf(ri)+1.ToString()+")"+ ri.ToString());
                 }
             }
             else

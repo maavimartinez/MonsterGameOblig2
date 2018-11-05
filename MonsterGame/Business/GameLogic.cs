@@ -196,7 +196,7 @@ namespace Business
             if (aliveSurvivors != "")
             {
                 aliveSurvivors.Trim(',');
-                ActiveGameResult = aliveSurvivors + " ,won !";
+                ActiveGameResult = aliveSurvivors + " won !";
                 CreateGameStatistic(aliveSurvivors);
                 return EndGame();
             }
@@ -256,6 +256,7 @@ namespace Business
                 activeGame.Result = "";
                 UpdateRanking();
                 RemovePlayersFromAllPlayers();
+                ResetScores();
                 activeGame.Players.Clear();
                 List<string> ret = new List<string>();
                 ret.Add("FINISHED");
@@ -283,9 +284,10 @@ namespace Business
                         {
                             ranking.RemoveAt(9);
                             Ranking ri = new Ranking();
-                            ri.GameDate = DateTime.Today.ToString();
+                            ri.GameDate = DateTime.Now.ToString();
                             ri.Role = pl.GetType();
                             ri.Score = pl.Score;
+                            ri.Username = pl.Client.Username;
                             ranking.Add(ri);
                             break;
                         }
@@ -297,14 +299,27 @@ namespace Business
                 while (ranking.Count < 10 && i < gamePlayers.Count)
                 {
                     Ranking ri = new Ranking();
-                    ri.GameDate = DateTime.Today.ToString();
+                    ri.GameDate = DateTime.Now.ToString();
                     ri.Role = gamePlayers[i].GetType();
                     ri.Score = gamePlayers[i].Score;
+                    ri.Username = gamePlayers[i].Client.Username;
                     ranking.Add(ri);
                     i++;
                 }
             }
             Store.SetRanking(ranking);
+        }
+
+        public void ResetScores()
+        {
+            activeGame = Store.GetGame();
+            List<Player> gamePlayers = activeGame.Players;
+
+            foreach (Player pl in gamePlayers)
+            {
+                pl.Score = 0;
+            }
+            Store.SetGame(activeGame);
         }
 
         public List<Ranking> Ranking()
@@ -359,14 +374,14 @@ namespace Business
             if (aliveMonsters == "" && TimeHasPassed(activeGame.LimitJoiningTime))
             {
                 aliveSurvivors = aliveSurvivors.Trim(',');
-                ActiveGameResult = aliveSurvivors + " ,won !";
+                ActiveGameResult = aliveSurvivors + " won !";
                 CreateGameStatistic(aliveSurvivors);
                 return EndGame();
             }
             else if (alivePlayers == 1 && aliveSurvivors == "" && TimeHasPassed(activeGame.LimitJoiningTime))
             {
                 aliveMonsters = aliveMonsters.Trim(',');
-                ActiveGameResult = aliveMonsters + " ,won !";
+                ActiveGameResult = aliveMonsters + " won !";
                 CreateGameStatistic(aliveMonsters);
                 return EndGame();
             }
