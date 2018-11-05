@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Entities
 {
     [Serializable]
-    public class RankingCredentials 
+    public class RankingDTO 
     {
         public string Username { get; set; }
 

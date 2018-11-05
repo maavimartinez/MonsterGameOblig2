@@ -48,18 +48,18 @@ namespace WebServices
             return lastGameLog;
         }
 
-        public List<RankingCredentials> GetRanking()
+        public List<RankingDTO> GetRanking()
         {
-            List<RankingCredentials> ranking = new List<RankingCredentials>();
+            List<RankingDTO> ranking = new List<RankingDTO>();
 
             ranking = gameLogic.Ranking();
 
             return ranking;
         }
 
-        public List<StatisticCredentials> GetStatistics()
+        public List<StatisticDTO> GetStatistics()
         {
-            List<StatisticCredentials> statistics = new List<StatisticCredentials>();
+            List<StatisticDTO> statistics = new List<StatisticDTO>();
 
             statistics = gameLogic.Statistics();
 

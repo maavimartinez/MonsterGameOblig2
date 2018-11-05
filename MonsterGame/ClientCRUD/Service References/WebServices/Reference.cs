@@ -44,16 +44,16 @@ namespace CRUDClient.WebServices {
         System.Threading.Tasks.Task<LogEntry> GetLastLogAsync();
 
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/ICRUDClientService/GetRanking", ReplyAction = "http://tempuri.org/ICRUDClientService/GetRankingResponse")]
-        Entities.RankingCredentials[] GetRanking();
+        Entities.RankingDTO[] GetRanking();
 
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/ICRUDClientService/GetRanking", ReplyAction = "http://tempuri.org/ICRUDClientService/GetRankingResponse")]
-        System.Threading.Tasks.Task<Entities.RankingCredentials[]> GetRankingAsync();
+        System.Threading.Tasks.Task<Entities.RankingDTO[]> GetRankingAsync();
 
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/ICRUDClientService/GetStatistics", ReplyAction = "http://tempuri.org/ICRUDClientService/GetStatisticsResponse")]
-        Entities.StatisticCredentials[] GetStatistics();
+        Entities.StatisticDTO[] GetStatistics();
 
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/ICRUDClientService/GetStatistics", ReplyAction = "http://tempuri.org/ICRUDClientService/GetStatisticsResponse")]
-        System.Threading.Tasks.Task<Entities.StatisticCredentials[]> GetStatisticsAsync();
+        System.Threading.Tasks.Task<Entities.StatisticDTO[]> GetStatisticsAsync();
 
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICRUDClientService/GetClients", ReplyAction="http://tempuri.org/ICRUDClientService/GetClientsResponse")]
         Business.ClientDTO[] GetClients();
@@ -122,22 +122,22 @@ namespace CRUDClient.WebServices {
             return base.Channel.GetLastLogAsync();
         }
 
-        public Entities.RankingCredentials[] GetRanking()
+        public Entities.RankingDTO[] GetRanking()
         {
             return base.Channel.GetRanking();
         }
 
-        public System.Threading.Tasks.Task<Entities.RankingCredentials[]> GetRankingAsync()
+        public System.Threading.Tasks.Task<Entities.RankingDTO[]> GetRankingAsync()
         {
             return base.Channel.GetRankingAsync();
         }
 
-        public Entities.StatisticCredentials[] GetStatistics()
+        public Entities.StatisticDTO[] GetStatistics()
         {
             return base.Channel.GetStatistics();
         }
 
-        public System.Threading.Tasks.Task<Entities.StatisticCredentials[]> GetStatisticsAsync()
+        public System.Threading.Tasks.Task<Entities.StatisticDTO[]> GetStatisticsAsync()
         {
             return base.Channel.GetStatisticsAsync();
         }

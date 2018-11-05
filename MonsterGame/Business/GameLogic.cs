@@ -18,8 +18,8 @@ namespace Business
         private Game activeGame { get; set; }
         private Board board { get; set; }
         private List<Player> allPlayers { get; set; }
-        private List<RankingCredentials> ranking { get; set; }
-        private List<StatisticCredentials> statistics { get; set; }
+        private List<RankingDTO> ranking { get; set; }
+        private List<StatisticDTO> statistics { get; set; }
 
         public GameLogic(IStore store)
         {
@@ -283,7 +283,7 @@ namespace Business
                         if(pl.Score > Int32.Parse(ranking.ElementAt(j).Score))
                         {
                             ranking.RemoveAt(9);
-                            RankingCredentials ri = new RankingCredentials();
+                            RankingDTO ri = new RankingDTO();
                             ri.GameDate = DateTime.Now.ToString();
                             ri.Role = pl.GetType().ToString();
                             ri.Score = pl.Score.ToString();
@@ -298,7 +298,7 @@ namespace Business
                 int i = 0;
                 while (ranking.Count < 10 && i < gamePlayers.Count)
                 {
-                    RankingCredentials ri = new RankingCredentials();
+                    RankingDTO ri = new RankingDTO();
                     ri.GameDate = DateTime.Now.ToString();
                     ri.Role = gamePlayers[i].GetType().ToString();
                     ri.Score = gamePlayers[i].Score.ToString();
@@ -322,12 +322,12 @@ namespace Business
             Store.SetGame(activeGame);
         }
 
-        public List<RankingCredentials> Ranking()
+        public List<RankingDTO> Ranking()
         {
             return Store.GetRanking();
         }
 
-        public List<StatisticCredentials> Statistics()
+        public List<StatisticDTO> Statistics()
         {
             return Store.GetStatistics();
         }
@@ -440,7 +440,7 @@ namespace Business
             activeGame = Store.GetGame();
             statistics = Store.GetStatistics();
             if (statistics.Count == 10) statistics.RemoveAt(0);
-            StatisticCredentials gameSt = new StatisticCredentials();
+            StatisticDTO gameSt = new StatisticDTO();
             gameSt.GameDate= DateTime.Now.ToString();
             gameSt.gameStatistic = new List<StatisticDetail>();
             if (winners.Equals("Nobody won :("))

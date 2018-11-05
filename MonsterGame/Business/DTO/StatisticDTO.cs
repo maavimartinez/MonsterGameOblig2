@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Entities
 {
     [Serializable]
-    public class StatisticCredentials
+    public class StatisticDTO
     {
         public string GameDate { get; set; }
         public List<StatisticDetail> gameStatistic { get; set; }

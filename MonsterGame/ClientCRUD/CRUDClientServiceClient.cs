@@ -139,10 +139,10 @@ namespace CRUDClient
 
         private void Ranking()
         {
-            List<RankingCredentials> ranking = crudServiceClient.GetRanking().ToList();
+            List<RankingDTO> ranking = crudServiceClient.GetRanking().ToList();
             if (ranking!=null && ranking.Count > 0)
             {
-                foreach(RankingCredentials ri in ranking)
+                foreach(RankingDTO ri in ranking)
                 {
                     Console.WriteLine(ranking.IndexOf(ri)+1.ToString()+")"+ ri.ToString());
                 }
@@ -159,10 +159,10 @@ namespace CRUDClient
 
         private void Statistics()
         {
-            List<StatisticCredentials> statistics = crudServiceClient.GetStatistics().ToList();
+            List<StatisticDTO> statistics = crudServiceClient.GetStatistics().ToList();
             if (statistics != null && statistics.Count > 0)
             {
-                foreach (StatisticCredentials st in statistics)
+                foreach (StatisticDTO st in statistics)
                 {
                     Console.WriteLine(st.ToString());
                 }

@@ -25,10 +25,10 @@ namespace WebServices
         LogEntry GetLastLog();
 
         [OperationContract]
-        List<RankingCredentials> GetRanking();
+        List<RankingDTO> GetRanking();
 
         [OperationContract]
-        List<StatisticCredentials> GetStatistics();
+        List<StatisticDTO> GetStatistics();
 
     }
 }
