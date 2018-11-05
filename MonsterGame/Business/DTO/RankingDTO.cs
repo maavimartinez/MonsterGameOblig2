@@ -22,5 +22,16 @@ namespace Entities
         {
             return $"Player: {Username} played as {Role.ToString().Split('.').Last()} on {GameDate}.{Environment.NewLine}  - Score: {Score}";
         }
+        public override bool Equals(object obj)
+        {
+            var item = obj as RankingDTO;
+
+            if (item == null)
+            {
+                return false;
+            }
+
+            return this.Username.Equals(item.Username)&& this.Score.Equals(item.Score)&& this.GameDate.Equals(item.GameDate)&& this.Role.Equals(item.Role);
+        }
     }
 }

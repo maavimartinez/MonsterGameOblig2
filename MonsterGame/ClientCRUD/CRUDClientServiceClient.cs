@@ -144,7 +144,9 @@ namespace CRUDClient
             {
                 foreach(RankingDTO ri in ranking)
                 {
-                    Console.WriteLine(ranking.IndexOf(ri)+1.ToString()+")"+ ri.ToString());
+                    int index = ranking.IndexOf(ri);
+                    index = index + 1;
+                    Console.WriteLine(index+")"+ ri.ToString());
                 }
             }
             else
