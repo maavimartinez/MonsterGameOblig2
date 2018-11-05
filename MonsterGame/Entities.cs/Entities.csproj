@@ -49,7 +49,6 @@
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ranking.cs" />
-    <Compile Include="RankingItem.cs" />
     <Compile Include="Server.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="StatisticDetail.cs" />

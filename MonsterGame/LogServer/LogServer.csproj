@@ -64,6 +64,10 @@
       <Project>{9cc03d3b-2a1b-4d8f-8764-ea8c6e934871}</Project>
       <Name>Persistence</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WebServices\WebServices.csproj">
+      <Project>{63C6CA36-7950-4A9A-9574-67F0CDEB0761}</Project>
+      <Name>WebServices</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

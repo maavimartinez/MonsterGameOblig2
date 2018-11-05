@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Entities
 {
     [DataContract]
-    public class RankingItem 
+    public class RankingCredentials 
     {
         [DataMember]
         public string Username { get; set; }
