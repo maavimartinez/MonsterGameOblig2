@@ -140,6 +140,7 @@ namespace Business
                 player.NumOfActions++;
                 Game auxGame = Store.GetGame();
                 auxGame.Players.Find(h => h.Client.Username == defender.Client.Username).HP = defender.HP;
+                auxGame.Players.Find(h => h.Client.Username == defender.Client.Username).IsAlive = defender.IsAlive;
                 Store.SetGame(auxGame);
             }
             else
