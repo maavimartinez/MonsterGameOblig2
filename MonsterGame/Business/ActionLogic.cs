@@ -138,6 +138,9 @@ namespace Business
                 Player defender = GetDefender(sndParameter);
                 ret = Attack(player, defender);
                 player.NumOfActions++;
+                Game auxGame = Store.GetGame();
+                auxGame.Players.Find(h => h.Client.Username == defender.Client.Username).HP = defender.HP;
+                Store.SetGame(auxGame);
             }
             else
             {
