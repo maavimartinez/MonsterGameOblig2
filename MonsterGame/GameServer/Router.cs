@@ -101,7 +101,9 @@ namespace GameServer
                     {
                         goto End;
                     }
-                    logRouter.LogResult(responseMessage);
+                    List<string> aux = new List<string>();
+                    aux = responseMessage.GetRange(i, responseMessage.Count - i);
+                    logRouter.LogResult(aux);
                 }
             }
             End:;
