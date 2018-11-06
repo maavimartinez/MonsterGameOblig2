@@ -176,7 +176,7 @@ namespace Persistence
 
         public List<StatisticDTO> GetStatistics()
         {
-            return this.Statistics;
+            return this.Statistics.Take(10).ToList();
         }
 
         public void SetStatistics(List<StatisticDTO> statistics)
