@@ -21,6 +21,7 @@ namespace Business
         private List<RankingDTO> ranking { get; set; }
         private List<StatisticDTO> statistics { get; set; }
 
+
         public GameLogic(IStore store)
         {
             Store = store;
@@ -263,7 +264,6 @@ namespace Business
                 ret.Add(ActiveGameResult.ToUpper());
                 ret = ret.Concat(Store.GetOriginalPlayers()).ToList();
                 Store.SetGame(activeGame);
-                Store.ResetOriginalPlayers();
                 return ret;
             }
             return null;
@@ -288,6 +288,7 @@ namespace Business
                             ri.Role = pl.GetType().ToString();
                             ri.Score = pl.Score.ToString();
                             ri.Username = pl.Client.Username;
+                            if(!ranking.Contains(ri))
                             ranking.Add(ri);
                             break;
                         }
@@ -303,7 +304,8 @@ namespace Business
                     ri.Role = gamePlayers[i].GetType().ToString();
                     ri.Score = gamePlayers[i].Score.ToString();
                     ri.Username = gamePlayers[i].Client.Username;
-                    ranking.Add(ri);
+                    if (!ranking.Contains(ri))
+                        ranking.Add(ri);
                     i++;
                 }
             }
@@ -348,13 +350,17 @@ namespace Business
         {
             activeGame = Store.GetGame();
             board = Store.GetBoard();
-            if (activeGame == null) activeGame = new Game();
+            if (activeGame == null)
+            {
+                activeGame = new Game();
+            }
             if (board == null) board = new Board();
             if (activeGame.Players.Count == 0)
             {
                 activeGame.isOn = true;
                 activeGame.StartTime = DateTime.Now;
                 ActiveGameResult = "";
+                Store.ResetOriginalPlayers();
                 board.InitializeBoard();
             }
             Store.SetGame(activeGame);
@@ -451,6 +457,7 @@ namespace Business
                     sd.Outcome = "Lost";
                     sd.Role = pl.GetType().Name;
                     sd.Username = pl.Client.Username;
+                    if(!gameSt.gameStatistic.Contains(sd))
                     gameSt.gameStatistic.Add(sd);
                 }
             }else
@@ -467,9 +474,11 @@ namespace Business
                     {
                         sd.Outcome = "Lost";
                     }
-                    gameSt.gameStatistic.Add(sd);
+                    if (!gameSt.gameStatistic.Contains(sd))
+                        gameSt.gameStatistic.Add(sd);
                 }
             }
+            if(!statistics.Contains(gameSt))
             statistics.Add(gameSt);
             Store.SetStatistics(statistics);
         }

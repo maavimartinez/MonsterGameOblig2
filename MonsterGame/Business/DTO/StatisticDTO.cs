@@ -22,5 +22,22 @@ namespace Entities
             }
             return sb.ToString();
         }
+        public override bool Equals(object obj)
+        {
+            var item = obj as StatisticDTO;
+
+            if (item == null)
+            {
+                return false;
+            }
+
+            bool containsInList = true;
+            foreach (StatisticDetail sd in this.gameStatistic)
+            {
+                if (!item.gameStatistic.Contains(sd))
+                    containsInList = false;
+            }
+            return this.GameDate.Equals(item.GameDate)&&containsInList;
+        }
     }
 }
