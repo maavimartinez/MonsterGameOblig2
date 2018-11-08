@@ -10,7 +10,6 @@ namespace Business
     public class GameLogic
     {
         public IStore Store { get; set; }
-        private Server Server { get; set; }
         private ActionLogic ActionLogic { get; set; }
         private PlayerLogic PlayerLogic { get; set; }
         private CRUDClientLogic ClientLogic { get; set; }
@@ -25,7 +24,6 @@ namespace Business
         public GameLogic(IStore store)
         {
             Store = store;
-            Server = new Server();
             ActionLogic = new ActionLogic(Store);
             PlayerLogic = new PlayerLogic(Store);
             ClientLogic = new CRUDClientLogic(Store);
@@ -38,6 +36,7 @@ namespace Business
 
         public bool UpdateClient(Client oldClient, Client newClient)
         {
+            Store.UpdateClient(oldClient, newClient);
             return ClientLogic.UpdateClient(oldClient, newClient);
         }
 
@@ -52,15 +51,15 @@ namespace Business
                 Store.AddClient(client);
             Client storedClient = Store.GetClient(client.Username);
             bool isValidPassword = storedClient.ValidatePassword(client.Password);
-            bool isClientConnected = Server.IsClientConnected(client);
+            bool isClientConnected = Store.IsClientConnected(client);
             if (isValidPassword && isClientConnected)
                 throw new ClientAlreadyConnectedException();
-            return isValidPassword ? Server.ConnectClient(storedClient) : "";
+            return isValidPassword ? Store.ConnectClient(storedClient) : "";
         }
 
         public Client GetLoggedClient(string userToken)
         {
-            Client loggedUser = Server.GetLoggedClient(userToken);
+            Client loggedUser = Store.GetLoggedClient(userToken);
             if (loggedUser == null)
                 throw new ClientNotConnectedException();
             return loggedUser;
@@ -68,7 +67,7 @@ namespace Business
 
         public List<Client> GetLoggedClients()
         {
-            return Server.GetLoggedClients();
+            return Store.GetLoggedClients();
         }
 
         public Player GetLoggedPlayer(string username)
@@ -78,7 +77,7 @@ namespace Business
 
         public List<Player> GetLoggedPlayers()
         {
-            List<Client> loggedClients = Server.GetLoggedClients();
+            List<Client> loggedClients = Store.GetLoggedClients();
             List<Player> ret = new List<Player>();
             allPlayers = Store.GetAllPlayers();
             foreach (Client cl in loggedClients)
@@ -111,7 +110,7 @@ namespace Business
 
         public void DisconnectClient(string token)
         {
-            Server.DisconnectClient(token);
+            Store.DisconnectClient(token);
         }
 
         public void SelectRole(Client loggedClient, string role)

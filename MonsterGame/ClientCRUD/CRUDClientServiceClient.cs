@@ -113,7 +113,7 @@ namespace CRUDClient
             {
                 ClientDTO clientToCreate = AskNewClientInfo();
 
-                created = crudServiceClient.CreateClient(clientToCreate);
+                 created = crudServiceClient.CreateClient(clientToCreate);
 
                 if (!created)
                     Console.WriteLine("\nUsername taken");

@@ -15,7 +15,7 @@ namespace Entities
         }
 
         public string Id { get; private set; }
-        public Client Client { get; private set; }
+        public Client Client { get;  set; }
         public DateTime ConnectedSince { get; set; }
         public DateTime ConnectedTo { get; set; }
         public bool Active { get; set; }

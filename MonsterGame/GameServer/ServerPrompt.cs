@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Business;
 using UI;
+using Entities;
 
 //FALTA PONER CONNECTED PLAYERS O ALGO ASI EN EL MENU, LO DEL OBLIG ANTERIOR
 namespace GameServer
@@ -36,11 +37,9 @@ namespace GameServer
             {
                 case 1:
                     ListAllClients();
-                   // logRouter.LogListOfAllClients();
                     break;
                 case 2:
                     ListConnectedClients();
-                    //logRouter.LogListOfConnectedUsers();
                     break;
             }
         }
@@ -68,14 +67,14 @@ namespace GameServer
             }
             else
             {
-                gameLogic.GetLoggedClients().ForEach(client =>
+                List<Client> connectedClients = gameLogic.GetLoggedClients();
+                foreach(Client client in connectedClients)
                 {
-                if (client.ConnectedSince == null) return;
-                TimeSpan timeConnected = DateTime.Now.Subtract((DateTime)client.ConnectedSince);
-                string timeConnectedFormatted = timeConnected.ToString(@"hh\:mm\:ss");
-                Console.WriteLine(
-                    $"- {client.Username} \tConnected: {client.ConnectionsCount} times \tConnected for: {timeConnectedFormatted}");
-                });
+                    if (client.ConnectedSince == null) return;
+                    string timeConnectedFormatted = ((DateTime)client.ConnectedSince).ToString(@"hh\:mm\:ss");
+                    Console.WriteLine(
+                        $"- {client.Username} \tConnected since: {timeConnectedFormatted}");
+                }
             }
         }
 

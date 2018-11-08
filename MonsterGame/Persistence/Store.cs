@@ -9,6 +9,7 @@ namespace Persistence
     public class Store : MarshalByRefObject, IStore
     {
         private List<Client> Clients { get; set; }
+        public List<Session> ConnectedClients { get; set; }
         public List<Player> AllPlayers { get; set; }
         private List<LogEntry> LogEntries { get; set; }
         public List<RankingDTO> Ranking { get; set; }
@@ -33,6 +34,7 @@ namespace Persistence
             Statistics = new List<StatisticDTO>();
             LogEntries = new List<LogEntry>();
             OriginalPlayers = new List<string>();
+            ConnectedClients = new List<Session>();
         }
 
         public bool ClientExists(Client client)
@@ -128,13 +130,17 @@ namespace Persistence
             }
         }
 
-        public void ConnectClient(Client client, Session session)
+        public string ConnectClient(Client client)
         {
             lock (loginLocker)
             {
+                var session = new Session(client);
+                ConnectedClients.Add(session);
                 Client storedClient = GetClient(client.Username);
                 storedClient.ConnectionsCount++;
                 storedClient.AddSession(session);
+                storedClient.ConnectedSince = DateTime.Now;
+                return session.Id;
             }
         }
 
@@ -148,6 +154,8 @@ namespace Persistence
         {
             lock (loginLocker)
             {
+                ConnectedClients.FindAll(session => session.Id.Equals(token)).ForEach(sesssion => sesssion.Deactivate());
+                ConnectedClients.RemoveAll(session => session.Id.Equals(token));
                 Client storedClient = Clients.Find(c => c.Sessions.Exists(s => s.Id.Equals(token)));
                 storedClient.Sessions = new List<Session>();
             }
@@ -157,11 +165,18 @@ namespace Persistence
         {
             lock (loginLocker)
             {
+                Session aux = ConnectedClients.Find(x => x.Client.Username == existingClient.Username);
+                aux.Client.Username = newClient.Username;
+                aux.Client.Password = newClient.Password;
                 Client storedClient = GetClient(existingClient.Username);
-
                 storedClient.Username = newClient.Username;
                 storedClient.Password = newClient.Password;
             }
+        }
+
+        public List<Client> GetLoggedClients()
+        {
+            return ConnectedClients.Select(session => session.Client).ToList();
         }
 
         public List<RankingDTO> GetRanking()
@@ -209,5 +224,11 @@ namespace Persistence
                 return null;
             }
         }
+
+        public Client GetLoggedClient(string token)
+        {
+            return ConnectedClients.Find(session => session.Id.Equals(token))?.Client;
+        }
+
     }
 }

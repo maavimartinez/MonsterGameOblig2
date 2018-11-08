@@ -9,7 +9,9 @@ namespace Business
         void AddClient(Client client);
         Client GetClient(string clientUsername);
         List<Client> GetClients();
-        void ConnectClient(Client client, Session session);
+        string ConnectClient(Client client);
+        Client GetLoggedClient(string userToken);
+        List<Client> GetLoggedClients();
         bool IsClientConnected(Client client);
         void DisconnectClient(string token);
         void UpdateClient(Client existingClient, Client newClient);
