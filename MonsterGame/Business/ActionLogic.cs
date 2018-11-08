@@ -140,10 +140,10 @@ namespace Business
             }
             else if (action.Equals("ATT"))
             {
-                Game auxGame = Store.GetGame();
                 Player defender = GetDefender(sndParameter);
                 ret = Attack(player, defender);
                 player.NumOfActions++;
+                Game auxGame = Store.GetGame();
                 auxGame.Players.Find(h => h.Client.Username == defender.Client.Username).HP = defender.HP;
                 // auxGame.Players.Find(h => h.Client.Username == player.Client.Username).NumOfActions++;
                 // auxGame.Players.Find(h => h.Client.Username == player.Client.Username).NumOfAttacks++;
