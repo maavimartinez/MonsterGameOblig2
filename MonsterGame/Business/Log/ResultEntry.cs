@@ -10,7 +10,7 @@ namespace Business.Log
 
         public override string ToString()
         {
-            return $"Last game ended at time : {Timestamp}.The result was: {Result}. These were the original players: {Players}";
+            return $"Last game ended at time : {Timestamp}\n The result was: {Result} These were the original players: {Players}";
         }
     }
 }

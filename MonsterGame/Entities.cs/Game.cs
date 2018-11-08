@@ -26,6 +26,7 @@ namespace Entities
             Players = new List <Player>();
             isOn = false;
             Result = "";
+            PlayersThatDied = new List<string>();
         }
 
     }

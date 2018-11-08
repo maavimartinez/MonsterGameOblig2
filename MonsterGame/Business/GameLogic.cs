@@ -171,7 +171,7 @@ namespace Business
             bool aux = false;
             if (lastPlayerWantsToLeave.Equals("true", StringComparison.OrdinalIgnoreCase)) aux = true;
             if (aux) throw new LastPlayerAbandonedGameException();
-            if ((TimeHasPassed(3)))
+            if ((TimeHasPassed(0.6)))
             {
                 throw new TimesOutException("");
             }
@@ -248,7 +248,7 @@ namespace Business
 
         public List<string> EndGame()
         {
-            activeGame = Store.GetGame();
+           activeGame = Store.GetGame();
             if (activeGame != null)
             {
                 activeGame.isOn = false;
@@ -261,6 +261,10 @@ namespace Business
                 ret.Add("FINISHED");
                 ret.Add(ActiveGameResult.ToUpper());
                 ret = ret.Concat(Store.GetOriginalPlayers()).ToList();
+                if(activeGame.PlayersThatDied.Count>0)
+                ret.Add(" Players that died:");
+                ret = ret.Concat(activeGame.PlayersThatDied).ToList();
+                activeGame.PlayersThatDied.Clear();
                 Store.SetGame(activeGame);
                 return ret;
             }

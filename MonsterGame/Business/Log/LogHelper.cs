@@ -13,7 +13,7 @@ namespace Business.Log
             string ret = "";
             foreach (string s in result)
             {
-                if (!s.Contains("Player:"))
+                if (!s.Contains("Player:") && !s.Contains("FINISHED"))
                     ret += s + Environment.NewLine;
             }
             return ret;

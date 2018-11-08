@@ -9,7 +9,7 @@ namespace Entities
 
         public string Username { get; set; }
         public string Password { get; set; }
-        public DateTime ConnectedSince {get; set;}// ConnectedSince => Sessions.Find(session => session.Active)?.ConnectedSince;
+        public DateTime ConnectedSince {get; set;}
         public int ConnectionsCount {
             get
             {

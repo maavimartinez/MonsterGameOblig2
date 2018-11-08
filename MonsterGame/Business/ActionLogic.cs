@@ -216,8 +216,11 @@ namespace Business
             UpdatePlayerScore(attacker, "attack");
             if (!defender.IsAlive)
             {
+                Game aux = Store.GetGame();
                 ret.Add("KILLED");
                 ret.Add(defender.Client.Username);
+                aux.PlayersThatDied.Add("-"+defender.Client.Username);
+                Store.SetGame(aux);
                 UpdatePlayerScore(attacker, "killed");
                 UpdatePlayerScore(defender, "dead");
             }
