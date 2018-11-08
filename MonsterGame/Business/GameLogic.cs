@@ -171,7 +171,7 @@ namespace Business
             bool aux = false;
             if (lastPlayerWantsToLeave.Equals("true", StringComparison.OrdinalIgnoreCase)) aux = true;
             if (aux) throw new LastPlayerAbandonedGameException();
-            if ((TimeHasPassed(0.6)))
+            if ((TimeHasPassed(1)))
             {
                 throw new TimesOutException("");
             }

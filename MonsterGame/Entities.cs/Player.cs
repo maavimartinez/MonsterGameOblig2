@@ -16,6 +16,11 @@ namespace Entities
 
         public int  NumOfActions { get; set; }
 
+        public int NumOfAttacks { get; set; }
+
+        public int NumOfMovements { get; set; }
+
+
         public int Score { get; set; }
 
         public Cell Position { get;set; }

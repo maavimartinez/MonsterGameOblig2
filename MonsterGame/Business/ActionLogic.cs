@@ -131,17 +131,25 @@ namespace Business
                 CheckCorrectMoveFormat(sndParameter);
                 Move(player, sndParameter);
                 player.NumOfActions++;
+                Game auxGame = Store.GetGame();
+                auxGame.Players.Find(h => h.Client.Username == player.Client.Username).NumOfActions++;
+                 auxGame.Players.Find(h => h.Client.Username == player.Client.Username).NumOfMovements++;
                 ret = new List<string>();
+                Store.SetGame(auxGame);
+
             }
             else if (action.Equals("ATT"))
             {
+                Game auxGame = Store.GetGame();
                 Player defender = GetDefender(sndParameter);
                 ret = Attack(player, defender);
                 player.NumOfActions++;
-                Game auxGame = Store.GetGame();
                 auxGame.Players.Find(h => h.Client.Username == defender.Client.Username).HP = defender.HP;
+                // auxGame.Players.Find(h => h.Client.Username == player.Client.Username).NumOfActions++;
+                // auxGame.Players.Find(h => h.Client.Username == player.Client.Username).NumOfAttacks++;
                 auxGame.Players.Find(h => h.Client.Username == defender.Client.Username).IsAlive = defender.IsAlive;
                 Store.SetGame(auxGame);
+
             }
             else
             {
