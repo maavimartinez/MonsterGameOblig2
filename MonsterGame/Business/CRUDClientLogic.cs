@@ -26,9 +26,8 @@ namespace Business
             if (!Store.ClientExists(existingClient))
                 return false;
 
-            Store.UpdateClient(existingClient, newClient);
+            return Store.UpdateClient(existingClient, newClient);
 
-            return true;
         }
 
         public bool DeleteClient(Client client)

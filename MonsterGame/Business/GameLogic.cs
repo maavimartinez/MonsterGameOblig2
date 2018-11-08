@@ -36,7 +36,6 @@ namespace Business
 
         public bool UpdateClient(Client oldClient, Client newClient)
         {
-            Store.UpdateClient(oldClient, newClient);
             return ClientLogic.UpdateClient(oldClient, newClient);
         }
 

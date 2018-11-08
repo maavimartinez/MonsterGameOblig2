@@ -10,6 +10,7 @@ namespace Entities
         {
             Id = GenerateRandomToken();
             Client = client;
+            Client.ConnectedSince = DateTime.Now;
             ConnectedSince = DateTime.Now;
             Active = true;
         }

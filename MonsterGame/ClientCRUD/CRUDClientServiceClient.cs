@@ -60,7 +60,10 @@ namespace CRUDClient
                 ClientDTO clientToDelete = AskExistingClientInfo();
 
                 if (!crudServiceClient.DeleteClient(clientToDelete))
-                    Console.WriteLine("Client does not exist or is connected.");
+                {
+                    Console.WriteLine("Client is connected. Press any key.");
+                    Console.ReadKey();
+                }    
             }
             catch (IndexOutOfRangeException)
             {
@@ -77,7 +80,13 @@ namespace CRUDClient
 
                 ClientDTO editedClient = AskNewClientInfo();
 
-                crudServiceClient.UpdateClient(existingClient, editedClient);
+                bool result = crudServiceClient.UpdateClient(existingClient, editedClient);
+
+                if (!result)
+                {
+                    Console.WriteLine("The client is already connected, you can't update his info.  Press any key.");
+                    Console.ReadKey();
+                }
             }
             catch (IndexOutOfRangeException)
             {

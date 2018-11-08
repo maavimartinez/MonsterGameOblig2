@@ -161,16 +161,23 @@ namespace Persistence
             }
         }
 
-        public void UpdateClient(Client existingClient, Client newClient)
+        public bool UpdateClient(Client existingClient, Client newClient)
         {
             lock (loginLocker)
             {
-                Session aux = ConnectedClients.Find(x => x.Client.Username == existingClient.Username);
-                aux.Client.Username = newClient.Username;
-                aux.Client.Password = newClient.Password;
-                Client storedClient = GetClient(existingClient.Username);
-                storedClient.Username = newClient.Username;
-                storedClient.Password = newClient.Password;
+
+                Session isConnected = ConnectedClients.Find(x => x.Client.Username == existingClient.Username);
+                if (isConnected == null)
+                {
+                    Client storedClient = GetClient(existingClient.Username);
+                    storedClient.Username = newClient.Username;
+                    storedClient.Password = newClient.Password;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 

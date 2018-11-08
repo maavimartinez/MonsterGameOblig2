@@ -14,7 +14,7 @@ namespace Business
         List<Client> GetLoggedClients();
         bool IsClientConnected(Client client);
         void DisconnectClient(string token);
-        void UpdateClient(Client existingClient, Client newClient);
+        bool UpdateClient(Client existingClient, Client newClient);
         void DeleteClient(Client client);
 
         void SetGame(Game game);
