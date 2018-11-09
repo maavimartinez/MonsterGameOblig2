@@ -114,7 +114,7 @@ namespace Business
             int min = Int32.MaxValue;
             foreach (Player pl in Store.GetGame().Players)
             {
-                if (pl.NumOfActions < min) min = pl.NumOfActions;
+                if (pl.NumOfActions < min && pl.IsAlive) min = pl.NumOfActions;
             }
             return min;
         }

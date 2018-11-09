@@ -25,6 +25,11 @@ namespace Entities
 
         public Cell Position { get;set; }
 
+        public Player(){
+            NumOfAttacks = 0;
+            NumOfMovements = 0;
+            }
+
     }
     
 }
