@@ -256,12 +256,17 @@ namespace Business
                 UpdateRanking();
                 RemovePlayersFromAllPlayers();
                 ResetScores();
-                activeGame.Players.Clear();
                 List<string> ret = new List<string>();
                 ret.Add("FINISHED");
                 ret.Add(ActiveGameResult.ToUpper());
                 ret = ret.Concat(Store.GetOriginalPlayers()).ToList();
-                if(activeGame.PlayersThatDied.Count>0)
+                ret.Add(" Actions during the game:");
+                foreach(Player p in activeGame.Players)
+                {
+                    ret.Add(" -"+p.Client.Username + " made " + p.NumOfMovements + " movements and " + p.NumOfAttacks + " attacks");
+                }
+                activeGame.Players.Clear();
+                if (activeGame.PlayersThatDied.Count>0)
                 ret.Add(" Players that died:");
                 ret = ret.Concat(activeGame.PlayersThatDied).ToList();
                 activeGame.PlayersThatDied.Clear();
