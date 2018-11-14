@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Business;
 using Entities;
+using System.Net.Sockets;
+
 
 namespace WebServices
 {
@@ -16,11 +18,11 @@ namespace WebServices
 
         public bool CreateClient(ClientDTO credentials)
         {
-            Client client = Converter.ClientDTOToClient(credentials);
+                Client client = Converter.ClientDTOToClient(credentials);
 
-            bool result = gameLogic.CreateClient(client);
+                bool result = gameLogic.CreateClient(client);
 
-            return result;
+                return result;
         }
 
         public bool DeleteClient(ClientDTO credentials)

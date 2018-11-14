@@ -8,28 +8,18 @@ namespace GameClient
     {
         private static ClientController clientController = new ClientController();
 
-        private const int MF_BYCOMMAND = 0x00000000;
-        public const int SC_CLOSE = 0xF060;
-
-        [DllImport("user32.dll")]
-        public static extern int DeleteMenu(IntPtr hMenu, int nPosition, int wFlags);
-
-        [DllImport("user32.dll")]
-        private static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
-
-        [DllImport("kernel32.dll", ExactSpelling = true)]
-        private static extern IntPtr GetConsoleWindow();
-
         static void Main(string[] args)
         {
             try
             {
-                DeleteMenu(GetSystemMenu(GetConsoleWindow(), false), SC_CLOSE, MF_BYCOMMAND);
+                handler = new ConsoleEventDelegate(ConsoleEventCallback);
+                SetConsoleCtrlHandler(handler, true);
                 clientController.LoopMenu();
             }
             catch (SocketException e)
             {
                 Console.WriteLine("There was a problem connecting to the server, the app will exit");
+                Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
                 Environment.Exit(1);
             }
@@ -42,6 +32,26 @@ namespace GameClient
                 Environment.Exit(1);
             }
         }
+
+        static bool ConsoleEventCallback(int eventType)
+        {
+            if (IsConsoleClosing(eventType))
+            {
+                Console.WriteLine("Console window closing, disconnecting client");
+                clientController.DisconnectFromServer();
+            }
+            return false;
+        }
+
+        private static bool IsConsoleClosing(int eventType)
+        {
+            return eventType == 2;
+        }
+
+        static ConsoleEventDelegate handler;
+        private delegate bool ConsoleEventDelegate(int eventType);
+        [DllImport("kernel32.dll", SetLastError = true)]
+        private static extern bool SetConsoleCtrlHandler(ConsoleEventDelegate callback, bool add);
 
     }
 }

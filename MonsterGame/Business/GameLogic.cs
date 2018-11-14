@@ -3,6 +3,8 @@ using System;
 using System.Linq;
 using Business.Exceptions;
 using Entities;
+using System.Net.Sockets;
+
 using System.Text.RegularExpressions;
 
 namespace Business
@@ -13,12 +15,13 @@ namespace Business
         private ActionLogic ActionLogic { get; set; }
         private PlayerLogic PlayerLogic { get; set; }
         private CRUDClientLogic ClientLogic { get; set; }
-        private string ActiveGameResult { get; set; }
         private Game activeGame { get; set; }
         private Board board { get; set; }
         private List<Player> allPlayers { get; set; }
         private List<RankingDTO> ranking { get; set; }
         private List<StatisticDTO> statistics { get; set; }
+
+        private readonly object resultByTimeout = new object();
 
 
         public GameLogic(IStore store)
@@ -31,7 +34,8 @@ namespace Business
 
         public bool CreateClient(Client client)
         {
-            return ClientLogic.CreateClient(client);
+ 
+         return ClientLogic.CreateClient(client);
         }
 
         public bool UpdateClient(Client oldClient, Client newClient)
@@ -139,7 +143,7 @@ namespace Business
             if (!activeGame.isOn)
             {
                 ret.Add("FINISHED");
-                ret.Add(ActiveGameResult.ToUpper());
+                ret.Add(Store.GetGameResult());
                 return ret;
             }
             else
@@ -153,7 +157,7 @@ namespace Business
                 catch (WaitForTurnException)
                 {
                     List<string> ended = CheckIfGameHasEnded();
-                    if (ended != null)
+                    if (ended.Count!=0)
                     {
                         ret = ret.Concat(ended).ToList();
                     }
@@ -171,7 +175,7 @@ namespace Business
             bool aux = false;
             if (lastPlayerWantsToLeave.Equals("true", StringComparison.OrdinalIgnoreCase)) aux = true;
             if (aux) throw new LastPlayerAbandonedGameException();
-            if ((TimeHasPassed(1)))
+            if ((TimeHasPassed(3)))
             {
                 throw new TimesOutException("");
             }
@@ -179,33 +183,42 @@ namespace Business
 
         public List<string> GetGameResultByTimeOut()
         {
-            string aliveMonsters = "";
-            string aliveSurvivors = "";
-            int alivePlayers = 0;
-            activeGame = Store.GetGame();
-            foreach (Player pl in activeGame.Players)
+            lock(resultByTimeout)
             {
-                if (pl.IsAlive)
+                string activeGameResult = Store.GetGameResult();
+            if (activeGameResult == "")
+            {
+                string aliveMonsters = "";
+                string aliveSurvivors = "";
+                int alivePlayers = 0;
+                activeGame = Store.GetGame();
+                foreach (Player pl in activeGame.Players)
                 {
-                    alivePlayers++;
-                    if (pl is Monster) aliveMonsters = aliveMonsters + pl.Client.Username + ",";
-                    if (pl is Survivor) aliveSurvivors = aliveSurvivors + pl.Client.Username + ",";
+                    if (pl.IsAlive)
+                    {
+                        alivePlayers++;
+                        if (pl is Monster) aliveMonsters = aliveMonsters + pl.Client.Username + ",";
+                        if (pl is Survivor) aliveSurvivors = aliveSurvivors + pl.Client.Username + ",";
+                    }
+                }
+                if (aliveSurvivors != "")
+                {
+                    aliveSurvivors.Trim(',');
+                    Store.SetGameResult(aliveSurvivors + " won !");
+                    CreateGameStatistic(aliveSurvivors);
+                    return EndGame();
+                }
+                else if (aliveSurvivors == "")
+                {
+                    Store.SetGameResult("Nobody won :(");
+                    CreateGameStatistic("Nobody won :(");
+                    return EndGame();
                 }
             }
-            if (aliveSurvivors != "")
-            {
-                aliveSurvivors.Trim(',');
-                ActiveGameResult = aliveSurvivors + " won !";
-                CreateGameStatistic(aliveSurvivors);
-                return EndGame();
+            List<string> aux = new List<string>();
+            aux.Add(activeGameResult);
+            return aux;
             }
-            else if (aliveSurvivors == "")
-            {
-                ActiveGameResult = "Nobody won :(";
-                CreateGameStatistic("Nobody won :(");
-                return EndGame();
-            }
-            return new List<string>();
         }
 
         public List<string> RemovePlayerFromGame(string username)
@@ -229,7 +242,7 @@ namespace Business
                 }
                 else if (activeGame.Players.Count == 0)
                 {
-                    ActiveGameResult = "Game has finished";
+                    Store.SetGameResult("Game has finished");
                     Store.SetBoard(board);
                     Store.SetGame(activeGame);
                     Store.SetAllPlayers(allPlayers);
@@ -248,7 +261,7 @@ namespace Business
 
         public List<string> EndGame()
         {
-           activeGame = Store.GetGame();
+            activeGame = Store.GetGame();
             if (activeGame != null)
             {
                 activeGame.isOn = false;
@@ -258,7 +271,7 @@ namespace Business
                 ResetScores();
                 List<string> ret = new List<string>();
                 ret.Add("FINISHED");
-                ret.Add(ActiveGameResult.ToUpper());
+                ret.Add(Store.GetGameResult());
                 ret = ret.Concat(Store.GetOriginalPlayers()).ToList();
                 ret.Add(" Actions during the game:");
                 foreach(Player p in activeGame.Players)
@@ -343,9 +356,9 @@ namespace Business
 
         public string GetGameResult()
         {
-            if (ActiveGameResult != "")
+            if (Store.GetGameResult() != "")
             {
-                return ActiveGameResult.ToUpper();
+                return Store.GetGameResult();
             }
             else
             {
@@ -366,7 +379,7 @@ namespace Business
             {
                 activeGame.isOn = true;
                 activeGame.StartTime = DateTime.Now;
-                ActiveGameResult = "";
+                Store.SetGameResult("");
                 Store.ResetOriginalPlayers();
                 board.InitializeBoard();
             }
@@ -392,14 +405,14 @@ namespace Business
             if (aliveMonsters == "" && TimeHasPassed(activeGame.LimitJoiningTime))
             {
                 aliveSurvivors = aliveSurvivors.Trim(',');
-                ActiveGameResult = aliveSurvivors + " won !";
+                Store.SetGameResult(aliveSurvivors + " won !");
                 CreateGameStatistic(aliveSurvivors);
                 return EndGame();
             }
             else if (alivePlayers == 1 && aliveSurvivors == "" && TimeHasPassed(activeGame.LimitJoiningTime))
             {
                 aliveMonsters = aliveMonsters.Trim(',');
-                ActiveGameResult = aliveMonsters + " won !";
+                Store.SetGameResult(aliveMonsters + " won !");
                 CreateGameStatistic(aliveMonsters);
                 return EndGame();
             }

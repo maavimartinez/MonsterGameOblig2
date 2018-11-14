@@ -1,4 +1,7 @@
 ﻿using Entities;
+using System;
+using System.Net.Sockets;
+
 
 namespace Business
 {
@@ -13,12 +16,13 @@ namespace Business
 
         public bool CreateClient(Client client)
         {
-            if (!Store.ClientExists(client))
-                Store.AddClient(client);
-            else
-                return false;
 
-            return true;
+                if (!Store.ClientExists(client))
+                    Store.AddClient(client);
+                else
+                    return false;
+
+                return true;    
         }
 
         public bool UpdateClient(Client existingClient, Client newClient)

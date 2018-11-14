@@ -507,6 +507,14 @@ namespace GameClient
         {
             for (int i = 0; i < responseMessage.Count(); i++)
             {
+                if (responseMessage[i].Contains("WON") && i==0)
+                {
+                    Console.WriteLine("Active Game's time is over!. You can now join a new game.");
+                    Console.WriteLine(responseMessage[i]);
+                    exitGame = true;
+                    timesOut = true;
+                    timer = null;
+                }
                 if (responseMessage[i] == "FINISHED")
                 {
                     if (responseMessage[i + 1].Equals("Game has finished", StringComparison.OrdinalIgnoreCase))

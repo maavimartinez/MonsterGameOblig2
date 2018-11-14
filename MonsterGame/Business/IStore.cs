@@ -20,6 +20,9 @@ namespace Business
         void SetGame(Game game);
         Game GetGame();
 
+        string GetGameResult();
+        void SetGameResult(string activeGameResult);
+
         void SetBoard(Board board);
         Board GetBoard();
 

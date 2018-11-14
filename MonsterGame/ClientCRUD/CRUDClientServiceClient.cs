@@ -4,6 +4,8 @@ using System.Linq;
 using UI;
 using Business;
 using Entities;
+using System.Net.Sockets;
+
 
 namespace CRUDClient
 {
@@ -116,17 +118,19 @@ namespace CRUDClient
 
         private void CreateClient()
         {
-            bool created = false;
 
-            while (!created)
-            {
-                ClientDTO clientToCreate = AskNewClientInfo();
+                bool created = false;
 
-                 created = crudServiceClient.CreateClient(clientToCreate);
+                while (!created)
+                {
+                    ClientDTO clientToCreate = AskNewClientInfo();
 
-                if (!created)
-                    Console.WriteLine("\nUsername taken");
-            }
+                    created = crudServiceClient.CreateClient(clientToCreate);
+
+                    if (!created)
+                        Console.WriteLine("\nUsername taken");
+                }
+
         }
 
         private void PrintLog()

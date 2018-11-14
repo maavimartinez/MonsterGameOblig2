@@ -15,11 +15,13 @@ namespace Persistence
         public List<RankingDTO> Ranking { get; set; }
         public List<StatisticDTO> Statistics { get; set; }
         public Game ActiveGame { get; set; }
+        public string ActiveGameResult { get; set; }
         private List<string> OriginalPlayers { get; set; }
 
         public Board Board { get; set; }
 
         private readonly object messagesLocker = new object();
+        private readonly object gameResult = new object();
         private readonly object loginLocker = new object();
         private readonly object friendshipLocker = new object();
         private readonly object logLocker = new object();
@@ -84,6 +86,22 @@ namespace Persistence
                         AllPlayers[i] = pl;
                     }
                 }
+            }
+        }
+
+        public string GetGameResult()
+        {
+            lock(gameResult)
+            {
+                return ActiveGameResult.ToUpper();
+            }
+        }
+
+        public void SetGameResult(string activeGameResult)
+        {
+            lock (gameResult)
+            {
+                this.ActiveGameResult = activeGameResult;
             }
         }
 
