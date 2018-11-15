@@ -17,17 +17,6 @@ namespace GameServer
 
         private static List<Thread> threads = new List<Thread>();
         private static List<Connection> connections = new List<Connection>();
-        private const int MF_BYCOMMAND = 0x00000000;
-        public const int SC_CLOSE = 0xF060;
-
-        [DllImport("user32.dll")]
-        public static extern int DeleteMenu(IntPtr hMenu, int nPosition, int wFlags);
-
-        [DllImport("user32.dll")]
-        private static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
-
-        [DllImport("kernel32.dll", ExactSpelling = true)]
-        private static extern IntPtr GetConsoleWindow();
 
         static void Main(string[] args)
         {
@@ -40,6 +29,8 @@ namespace GameServer
             Store store = null;
             try
             {
+                handler = new ConsoleEventDelegate(ConsoleEventCallback);
+                SetConsoleCtrlHandler(handler, true);
                 store = (Store)Activator.GetObject(typeof(Store),
                     $"tcp://{storeServerIp}:{storeServerPort}/RemoteStore");
                 store.GetClients();
@@ -59,7 +50,16 @@ namespace GameServer
             Thread serverThread = launcher.StartAcceptingConnections(gameLogic);
 
             var prompt = new ServerPrompt(gameLogic);
-            prompt.PromptUserForAction();
+            try
+            {
+                prompt.PromptUserForAction();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Store isn't available. Closing app...");
+                Thread.Sleep(5000);
+                Environment.Exit(0);
+            }
 
             serverThread.Join();
         }
@@ -102,6 +102,26 @@ namespace GameServer
             }
             Console.WriteLine("Every thread has been closed. Good-bye.");
         }
+
+        static bool ConsoleEventCallback(int eventType)
+        {
+            if (IsConsoleClosing(eventType))
+            {
+                Console.WriteLine("Console window closing");
+                Environment.Exit(0);
+            }
+            return false;
+        }
+
+        private static bool IsConsoleClosing(int eventType)
+        {
+            return eventType == 2;
+        }
+
+        static ConsoleEventDelegate handler;
+        private delegate bool ConsoleEventDelegate(int eventType);
+        [DllImport("kernel32.dll", SetLastError = true)]
+        private static extern bool SetConsoleCtrlHandler(ConsoleEventDelegate callback, bool add);
 
     }
 

@@ -20,22 +20,22 @@ namespace CRUDClient.WebServices {
     public interface ICRUDClientService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICRUDClientService/CreateClient", ReplyAction="http://tempuri.org/ICRUDClientService/CreateClientResponse")]
-        bool CreateClient(Business.ClientDTO client);
+        WcfCode CreateClient(Business.ClientDTO client);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICRUDClientService/CreateClient", ReplyAction="http://tempuri.org/ICRUDClientService/CreateClientResponse")]
-        System.Threading.Tasks.Task<bool> CreateClientAsync(Business.ClientDTO client);
+        System.Threading.Tasks.Task<WcfCode> CreateClientAsync(Business.ClientDTO client);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICRUDClientService/UpdateClient", ReplyAction="http://tempuri.org/ICRUDClientService/UpdateClientResponse")]
-        bool UpdateClient(Business.ClientDTO old, Business.ClientDTO newC);
+        WcfCode UpdateClient(Business.ClientDTO old, Business.ClientDTO newC);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICRUDClientService/UpdateClient", ReplyAction="http://tempuri.org/ICRUDClientService/UpdateClientResponse")]
-        System.Threading.Tasks.Task<bool> UpdateClientAsync(Business.ClientDTO old, Business.ClientDTO newC);
+        System.Threading.Tasks.Task<WcfCode> UpdateClientAsync(Business.ClientDTO old, Business.ClientDTO newC);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICRUDClientService/DeleteClient", ReplyAction="http://tempuri.org/ICRUDClientService/DeleteClientResponse")]
-        bool DeleteClient(Business.ClientDTO client);
+        WcfCode DeleteClient(Business.ClientDTO client);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICRUDClientService/DeleteClient", ReplyAction="http://tempuri.org/ICRUDClientService/DeleteClientResponse")]
-        System.Threading.Tasks.Task<bool> DeleteClientAsync(Business.ClientDTO client);
+        System.Threading.Tasks.Task<WcfCode> DeleteClientAsync(Business.ClientDTO client);
 
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/ICRUDClientService/GetLastLog", ReplyAction = "http://tempuri.org/ICRUDClientService/GetLastLogResponse")]
         LogEntry GetLastLog();
@@ -89,27 +89,27 @@ namespace CRUDClient.WebServices {
                 base(binding, remoteAddress) {
         }
         
-        public bool CreateClient(Business.ClientDTO client) {
+        public WcfCode CreateClient(Business.ClientDTO client) {
             return base.Channel.CreateClient(client);
         }
         
-        public System.Threading.Tasks.Task<bool> CreateClientAsync(Business.ClientDTO client) {
+        public System.Threading.Tasks.Task<WcfCode> CreateClientAsync(Business.ClientDTO client) {
             return base.Channel.CreateClientAsync(client);
         }
         
-        public bool UpdateClient(Business.ClientDTO old, Business.ClientDTO newC) {
+        public WcfCode UpdateClient(Business.ClientDTO old, Business.ClientDTO newC) {
             return base.Channel.UpdateClient(old, newC);
         }
         
-        public System.Threading.Tasks.Task<bool> UpdateClientAsync(Business.ClientDTO old, Business.ClientDTO newC) {
+        public System.Threading.Tasks.Task<WcfCode> UpdateClientAsync(Business.ClientDTO old, Business.ClientDTO newC) {
             return base.Channel.UpdateClientAsync(old, newC);
         }
         
-        public bool DeleteClient(Business.ClientDTO client) {
+        public WcfCode DeleteClient(Business.ClientDTO client) {
             return base.Channel.DeleteClient(client);
         }
         
-        public System.Threading.Tasks.Task<bool> DeleteClientAsync(Business.ClientDTO client) {
+        public System.Threading.Tasks.Task<WcfCode> DeleteClientAsync(Business.ClientDTO client) {
             return base.Channel.DeleteClientAsync(client);
         }
 

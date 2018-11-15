@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Entities;
 using Business;
 using System.Linq;
+using System.Net.Sockets;
+
 
 namespace Persistence
 {
@@ -46,7 +48,14 @@ namespace Persistence
 
         public void AddClient(Client client)
         {
-            Clients.Add(client);
+            try
+            {
+                Clients.Add(client);
+            }
+            catch (SocketException)
+            {
+                throw new SocketException();
+            }
         }
 
         public Client GetClient(string clientUsername)
@@ -77,11 +86,11 @@ namespace Persistence
 
         public void UpdateGamePlayersOnAllPlayers(Game activeGame)
         {
-            foreach(Player pl in activeGame.Players)
+            foreach (Player pl in activeGame.Players)
             {
-                for(int i=0; i < AllPlayers.Count; i++)
+                for (int i = 0; i < AllPlayers.Count; i++)
                 {
-                    if(AllPlayers[i].Client.Username == pl.Client.Username)
+                    if (AllPlayers[i].Client.Username == pl.Client.Username)
                     {
                         AllPlayers[i] = pl;
                     }
@@ -91,7 +100,7 @@ namespace Persistence
 
         public string GetGameResult()
         {
-            lock(gameResult)
+            lock (gameResult)
             {
                 return ActiveGameResult.ToUpper();
             }
@@ -206,7 +215,7 @@ namespace Persistence
 
         public List<RankingDTO> GetRanking()
         {
-            return this.Ranking.OrderByDescending(x=>x.Score).Take(10).ToList();
+            return this.Ranking.OrderByDescending(x => x.Score).Take(10).ToList();
         }
 
         public void SetRanking(List<RankingDTO> newRanking)
@@ -244,8 +253,8 @@ namespace Persistence
         {
             lock (logLocker)
             {
-                if(LogEntries.Count>0)
-                return LogEntries.Last();
+                if (LogEntries.Count > 0)
+                    return LogEntries.Last();
                 return null;
             }
         }

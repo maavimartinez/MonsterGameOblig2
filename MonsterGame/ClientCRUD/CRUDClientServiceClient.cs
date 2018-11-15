@@ -61,11 +61,19 @@ namespace CRUDClient
             {
                 ClientDTO clientToDelete = AskExistingClientInfo();
 
-                if (!crudServiceClient.DeleteClient(clientToDelete))
+                WcfCode result = crudServiceClient.DeleteClient(clientToDelete);
+                if (result == WcfCode.False)
                 {
                     Console.WriteLine("Client is connected. Press any key.");
                     Console.ReadKey();
-                }    
+                }
+                else if (result == WcfCode.Null)
+                {
+                    Console.WriteLine("\nStore server shut down");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                    Environment.Exit(0);
+                }
             }
             catch (IndexOutOfRangeException)
             {
@@ -82,12 +90,19 @@ namespace CRUDClient
 
                 ClientDTO editedClient = AskNewClientInfo();
 
-                bool result = crudServiceClient.UpdateClient(existingClient, editedClient);
+                WcfCode result = crudServiceClient.UpdateClient(existingClient, editedClient);
 
-                if (!result)
+                if (result == WcfCode.False)
                 {
                     Console.WriteLine("The client is already connected, you can't update his info.  Press any key.");
                     Console.ReadKey();
+                }
+                else if (result == WcfCode.Null)
+                {
+                    Console.WriteLine("\nStore server shut down");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                    Environment.Exit(0);
                 }
             }
             catch (IndexOutOfRangeException)
@@ -99,10 +114,24 @@ namespace CRUDClient
 
         private ClientDTO AskExistingClientInfo()
         {
-            List<ClientDTO> existingClients = crudServiceClient.GetClients().ToList();
+            ICollection<ClientDTO> aux = crudServiceClient.GetClients();
+            List<ClientDTO> existingClients = new List<ClientDTO>();
 
-            if (existingClients.Count == 0)
+            if (aux == null)
+            {
+                Console.WriteLine("\nStore server shut down");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+                Environment.Exit(0);
+            }
+            else if (aux.Count == 0)
+            {
                 throw new IndexOutOfRangeException();
+            }
+            else
+            {
+                existingClients = aux.ToList();
+            }
 
             var existingClientsUsernames = new List<string>();
 
@@ -118,18 +147,24 @@ namespace CRUDClient
 
         private void CreateClient()
         {
+            WcfCode created = WcfCode.False;
 
-                bool created = false;
+            while (created == WcfCode.False)
+            {
+                ClientDTO clientToCreate = AskNewClientInfo();
 
-                while (!created)
+                created = crudServiceClient.CreateClient(clientToCreate);
+
+                if (created == WcfCode.False)
+                    Console.WriteLine("\nUsername taken");
+                if (created == WcfCode.Null)
                 {
-                    ClientDTO clientToCreate = AskNewClientInfo();
-
-                    created = crudServiceClient.CreateClient(clientToCreate);
-
-                    if (!created)
-                        Console.WriteLine("\nUsername taken");
+                    Console.WriteLine("\nStore server shut down");
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                    Environment.Exit(0);
                 }
+            }
 
         }
 
@@ -143,7 +178,6 @@ namespace CRUDClient
             else
             {
                 Console.WriteLine("There hasn't been a game yet.");
-
             }
             Console.WriteLine("-------------------");
             Console.WriteLine("Press any key to continue...");
@@ -152,44 +186,68 @@ namespace CRUDClient
 
         private void Ranking()
         {
-            List<RankingDTO> ranking = crudServiceClient.GetRanking().ToList();
-            if (ranking!=null && ranking.Count > 0)
+            ICollection<RankingDTO> aux = crudServiceClient.GetRanking();
+            List<RankingDTO> ranking = new List<RankingDTO>();
+            if (aux == null)
             {
-                foreach(RankingDTO ri in ranking)
-                {
-                    int index = ranking.IndexOf(ri);
-                    index = index + 1;
-                    Console.WriteLine(index+")"+ ri.ToString());
-                }
+                Console.WriteLine("\nStore server shut down");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+                Environment.Exit(0);
             }
             else
             {
-                Console.WriteLine("No ranking available.");
+                ranking = aux.ToList();
+                if (ranking != null && ranking.Count > 0)
+                {
+                    foreach (RankingDTO ri in ranking)
+                    {
+                        int index = ranking.IndexOf(ri);
+                        index = index + 1;
+                        Console.WriteLine(index + ")" + ri.ToString());
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No ranking available.");
 
+                }
+                Console.WriteLine("-------------------");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
             }
-            Console.WriteLine("-------------------");
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
         }
 
         private void Statistics()
         {
-            List<StatisticDTO> statistics = crudServiceClient.GetStatistics().ToList();
-            if (statistics != null && statistics.Count > 0)
+            ICollection<StatisticDTO> aux = crudServiceClient.GetStatistics();
+            List<StatisticDTO> statistics = new List<StatisticDTO>();
+            if (aux == null)
             {
-                foreach (StatisticDTO st in statistics)
-                {
-                    Console.WriteLine(st.ToString());
-                }
+                Console.WriteLine("\nStore server shut down");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+                Environment.Exit(0);
             }
             else
             {
-                Console.WriteLine("No statistics available.");
+                statistics = aux.ToList();
+                if (statistics != null && statistics.Count > 0)
+                {
+                    foreach (StatisticDTO st in statistics)
+                    {
+                        Console.WriteLine(st.ToString());
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No statistics available.");
 
-            }
-            Console.WriteLine("-------------------");
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
+                }
+                Console.WriteLine("-------------------");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+            }      
         }
 
         private ClientDTO AskNewClientInfo()

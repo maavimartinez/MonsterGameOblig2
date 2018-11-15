@@ -16,32 +16,53 @@ namespace Business
 
         public bool CreateClient(Client client)
         {
-
+            try
+            {
                 if (!Store.ClientExists(client))
                     Store.AddClient(client);
                 else
                     return false;
 
-                return true;    
+                return true;
+            }
+            catch (SocketException)
+            {
+                throw new SocketException();
+            }
+
         }
 
         public bool UpdateClient(Client existingClient, Client newClient)
         {
-            if (!Store.ClientExists(existingClient))
-                return false;
+            try
+            {
+                if (!Store.ClientExists(existingClient))
+                    return false;
 
-            return Store.UpdateClient(existingClient, newClient);
+                return Store.UpdateClient(existingClient, newClient);
+            }
+            catch (SocketException)
+            {
+                throw new SocketException();
+            }
 
         }
 
         public bool DeleteClient(Client client)
         {
-            if (!Store.ClientExists(client) || Store.IsClientConnected(client))
-                return false;
+            try
+            {
+                if (!Store.ClientExists(client) || Store.IsClientConnected(client))
+                    return false;
 
-            Store.DeleteClient(client);
+                Store.DeleteClient(client);
 
-            return true;
+                return true;
+            }
+            catch (SocketException)
+            {
+                throw new SocketException();
+            }
         }
 
 

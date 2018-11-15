@@ -4,6 +4,7 @@ using Entities;
 using System.Net.Sockets;
 
 
+
 namespace WebServices
 {
     //AGREGAR LOG
@@ -16,66 +17,116 @@ namespace WebServices
             gameLogic = MainController.GameLogicInstance();
         }
 
-        public bool CreateClient(ClientDTO credentials)
+        public WcfCode CreateClient(ClientDTO credentials)
         {
+            try
+            {
                 Client client = Converter.ClientDTOToClient(credentials);
 
                 bool result = gameLogic.CreateClient(client);
 
-                return result;
+                return result ? WcfCode.True : WcfCode.False;
+            }
+            catch (SocketException)
+            {
+                return WcfCode.Null;
+            }
         }
 
-        public bool DeleteClient(ClientDTO credentials)
+        public WcfCode DeleteClient(ClientDTO credentials)
         {
-            Client client = Converter.ClientDTOToClient(credentials);
+            try
+            {
+                Client client = Converter.ClientDTOToClient(credentials);
 
-            bool result = gameLogic.DeleteClient(client);
+                bool result = gameLogic.DeleteClient(client);
 
-            return result;
+                return result ? WcfCode.True : WcfCode.False;
+            }
+            catch (SocketException)
+            {
+                return WcfCode.Null;
+            }
+
         }
 
         public List<ClientDTO> GetClients()
         {
-            List<ClientDTO> credentials = new List<ClientDTO>();
+            try
+            {
+                List<ClientDTO> credentials = new List<ClientDTO>();
 
-            gameLogic.GetClients().ForEach(c => credentials.Add(Converter.ClientToCredentials(c)));
+                gameLogic.GetClients().ForEach(c => credentials.Add(Converter.ClientToCredentials(c)));
 
-            return credentials;
+                return credentials;
+            }
+            catch (SocketException) {
+                return null;
+            } 
         }
 
         public LogEntry GetLastLog()
         {
-            LogEntry lastGameLog = gameLogic.GetLastLogEntry();
+            try
+            {
+                LogEntry lastGameLog = gameLogic.GetLastLogEntry();
 
-            return lastGameLog;
+                return lastGameLog;
+            }
+            catch (SocketException)
+            {
+                return null;
+            }
         }
 
         public List<RankingDTO> GetRanking()
         {
-            List<RankingDTO> ranking = new List<RankingDTO>();
+            try
+            {
+                List<RankingDTO> ranking = new List<RankingDTO>();
 
-            ranking = gameLogic.Ranking();
+                ranking = gameLogic.Ranking();
 
-            return ranking;
+                return ranking;
+            }
+            catch (SocketException)
+            {
+                return null;
+            }
         }
 
         public List<StatisticDTO> GetStatistics()
         {
-            List<StatisticDTO> statistics = new List<StatisticDTO>();
+            try
+            {
+                List<StatisticDTO> statistics = new List<StatisticDTO>();
 
-            statistics = gameLogic.Statistics();
+                statistics = gameLogic.Statistics();
 
-            return statistics;
+                return statistics;
+            }
+            catch (SocketException)
+            {
+                return null;
+            }
         }
 
-        public bool UpdateClient(ClientDTO oldCredentials, ClientDTO newCredentials)
+        public WcfCode UpdateClient(ClientDTO oldCredentials, ClientDTO newCredentials)
         {
-            Client old = Converter.ClientDTOToClient(oldCredentials);
-            Client newC = Converter.ClientDTOToClient(newCredentials);
+            try
+            {
+                Client old = Converter.ClientDTOToClient(oldCredentials);
+                Client newC = Converter.ClientDTOToClient(newCredentials);
 
-            bool result = gameLogic.UpdateClient(old, newC);
+                bool result = gameLogic.UpdateClient(old, newC);
 
-            return result;
+                return result ? WcfCode.True : WcfCode.False;
+            }
+            catch (SocketException)
+            {
+                return WcfCode.Null;
+            }
+
         }
     }
 }

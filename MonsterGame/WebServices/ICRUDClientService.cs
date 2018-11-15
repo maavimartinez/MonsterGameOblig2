@@ -12,13 +12,13 @@ namespace WebServices
     public interface ICRUDClientService
     {
         [OperationContract]
-        bool CreateClient(ClientDTO client);
+        WcfCode CreateClient(ClientDTO client);
 
         [OperationContract]
-        bool UpdateClient(ClientDTO old, ClientDTO newC);
+        WcfCode UpdateClient(ClientDTO old, ClientDTO newC);
 
         [OperationContract]
-        bool DeleteClient(ClientDTO client);
+        WcfCode DeleteClient(ClientDTO client);
 
         [OperationContract]
         List<ClientDTO> GetClients();

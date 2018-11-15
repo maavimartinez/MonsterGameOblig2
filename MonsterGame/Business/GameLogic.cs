@@ -34,18 +34,38 @@ namespace Business
 
         public bool CreateClient(Client client)
         {
- 
-         return ClientLogic.CreateClient(client);
+            try
+            {
+                return ClientLogic.CreateClient(client);
+            }
+            catch (SocketException)
+            {
+                throw new SocketException();
+            }
         }
 
         public bool UpdateClient(Client oldClient, Client newClient)
         {
-            return ClientLogic.UpdateClient(oldClient, newClient);
+            try
+            {
+                return ClientLogic.UpdateClient(oldClient, newClient);
+            }
+            catch (SocketException)
+            {
+                throw new SocketException();
+            }
         }
 
         public bool DeleteClient(Client client)
         {
-            return ClientLogic.DeleteClient(client);
+            try
+            {
+                return ClientLogic.DeleteClient(client);
+            }
+            catch (SocketException)
+            {
+                throw new SocketException();
+            }
         }
 
         public string Login(Client client)
@@ -96,7 +116,14 @@ namespace Business
 
         public List<Client> GetClients()
         {
-            return Store.GetClients();
+            try
+            {
+                return Store.GetClients();
+            }
+            catch (SocketException)
+            {
+                throw new SocketException();
+            }
         }
 
         public List<Player> GetCurrentPlayers()
@@ -109,11 +136,15 @@ namespace Business
             {
                 return new List<Player>();
             }
+            catch (SocketException)
+            {
+                throw new SocketException();
+            }
         }
 
         public void DisconnectClient(string token)
         {
-            Store.DisconnectClient(token);
+             Store.DisconnectClient(token);
         }
 
         public void SelectRole(Client loggedClient, string role)
@@ -130,8 +161,7 @@ namespace Business
             if (logged == null) throw new RoleNotChosenException();
             InitializeGame();
             PlayerLogic.JoinPlayerToGame(logged);
-            Store.AddOriginalPlayer("Player: "+usernameFrom);
-
+            Store.AddOriginalPlayer("Player: " + usernameFrom);
         }
 
         public List<string> DoAction(string usernameFrom, string action)
@@ -157,7 +187,7 @@ namespace Business
                 catch (WaitForTurnException)
                 {
                     List<string> ended = CheckIfGameHasEnded();
-                    if (ended.Count!=0)
+                    if (ended.Count != 0)
                     {
                         ret = ret.Concat(ended).ToList();
                     }
@@ -183,41 +213,41 @@ namespace Business
 
         public List<string> GetGameResultByTimeOut()
         {
-            lock(resultByTimeout)
+            lock (resultByTimeout)
             {
                 string activeGameResult = Store.GetGameResult();
-            if (activeGameResult == "")
-            {
-                string aliveMonsters = "";
-                string aliveSurvivors = "";
-                int alivePlayers = 0;
-                activeGame = Store.GetGame();
-                foreach (Player pl in activeGame.Players)
+                if (activeGameResult == "")
                 {
-                    if (pl.IsAlive)
+                    string aliveMonsters = "";
+                    string aliveSurvivors = "";
+                    int alivePlayers = 0;
+                    activeGame = Store.GetGame();
+                    foreach (Player pl in activeGame.Players)
                     {
-                        alivePlayers++;
-                        if (pl is Monster) aliveMonsters = aliveMonsters + pl.Client.Username + ",";
-                        if (pl is Survivor) aliveSurvivors = aliveSurvivors + pl.Client.Username + ",";
+                        if (pl.IsAlive)
+                        {
+                            alivePlayers++;
+                            if (pl is Monster) aliveMonsters = aliveMonsters + pl.Client.Username + ",";
+                            if (pl is Survivor) aliveSurvivors = aliveSurvivors + pl.Client.Username + ",";
+                        }
+                    }
+                    if (aliveSurvivors != "")
+                    {
+                        aliveSurvivors.Trim(',');
+                        Store.SetGameResult(aliveSurvivors + " won !");
+                        CreateGameStatistic(aliveSurvivors);
+                        return EndGame();
+                    }
+                    else if (aliveSurvivors == "")
+                    {
+                        Store.SetGameResult("Nobody won :(");
+                        CreateGameStatistic("Nobody won :(");
+                        return EndGame();
                     }
                 }
-                if (aliveSurvivors != "")
-                {
-                    aliveSurvivors.Trim(',');
-                    Store.SetGameResult(aliveSurvivors + " won !");
-                    CreateGameStatistic(aliveSurvivors);
-                    return EndGame();
-                }
-                else if (aliveSurvivors == "")
-                {
-                    Store.SetGameResult("Nobody won :(");
-                    CreateGameStatistic("Nobody won :(");
-                    return EndGame();
-                }
-            }
-            List<string> aux = new List<string>();
-            aux.Add(activeGameResult);
-            return aux;
+                List<string> aux = new List<string>();
+                aux.Add(activeGameResult);
+                return aux;
             }
         }
 
@@ -274,13 +304,13 @@ namespace Business
                 ret.Add(Store.GetGameResult());
                 ret = ret.Concat(Store.GetOriginalPlayers()).ToList();
                 ret.Add(" Actions during the game:");
-                foreach(Player p in activeGame.Players)
+                foreach (Player p in activeGame.Players)
                 {
-                    ret.Add(" -"+p.Client.Username + " made " + p.NumOfMovements + " movements and " + p.NumOfAttacks + " attacks");
+                    ret.Add(" -" + p.Client.Username + " made " + p.NumOfMovements + " movements and " + p.NumOfAttacks + " attacks");
                 }
                 activeGame.Players.Clear();
-                if (activeGame.PlayersThatDied.Count>0)
-                ret.Add(" Players that died:");
+                if (activeGame.PlayersThatDied.Count > 0)
+                    ret.Add(" Players that died:");
                 ret = ret.Concat(activeGame.PlayersThatDied).ToList();
                 activeGame.PlayersThatDied.Clear();
                 Store.SetGame(activeGame);
@@ -294,13 +324,13 @@ namespace Business
             activeGame = Store.GetGame();
             ranking = Store.GetRanking();
             List<Player> gamePlayers = activeGame.Players.OrderByDescending(x => x.Score).ToList();
-            if(ranking.Count == 10)
+            if (ranking.Count == 10)
             {
-                foreach(Player pl in gamePlayers)
+                foreach (Player pl in gamePlayers)
                 {
-                    for(int j=0; j<ranking.Count; j++)
+                    for (int j = 0; j < ranking.Count; j++)
                     {
-                        if(pl.Score > Int32.Parse(ranking.ElementAt(j).Score))
+                        if (pl.Score > Int32.Parse(ranking.ElementAt(j).Score))
                         {
                             ranking.RemoveAt(9);
                             RankingDTO ri = new RankingDTO();
@@ -308,13 +338,14 @@ namespace Business
                             ri.Role = pl.GetType().ToString();
                             ri.Score = pl.Score.ToString();
                             ri.Username = pl.Client.Username;
-                            if(!ranking.Contains(ri))
-                            ranking.Add(ri);
+                            if (!ranking.Contains(ri))
+                                ranking.Add(ri);
                             break;
                         }
-                    }      
+                    }
                 }
-            }else
+            }
+            else
             {
                 int i = 0;
                 while (ranking.Count < 10 && i < gamePlayers.Count)
@@ -445,7 +476,7 @@ namespace Business
             Store.SetAllPlayers(allPlayers);
         }
 
-       public void AddLogEntry(LogEntry entry)
+        public void AddLogEntry(LogEntry entry)
         {
             Store.AddLogEntry(entry);
 
@@ -467,30 +498,32 @@ namespace Business
             statistics = Store.GetStatistics();
             if (statistics.Count == 10) statistics.RemoveAt(0);
             StatisticDTO gameSt = new StatisticDTO();
-            gameSt.GameDate= DateTime.Now.ToString();
+            gameSt.GameDate = DateTime.Now.ToString();
             gameSt.gameStatistic = new List<StatisticDetail>();
             if (winners.Equals("Nobody won :("))
             {
-                foreach(Player pl in activeGame.Players)
+                foreach (Player pl in activeGame.Players)
                 {
                     StatisticDetail sd = new StatisticDetail();
                     sd.Outcome = "Lost";
                     sd.Role = pl.GetType().Name;
                     sd.Username = pl.Client.Username;
-                    if(!gameSt.gameStatistic.Contains(sd))
-                    gameSt.gameStatistic.Add(sd);
+                    if (!gameSt.gameStatistic.Contains(sd))
+                        gameSt.gameStatistic.Add(sd);
                 }
-            }else
+            }
+            else
             {
                 foreach (Player pl in activeGame.Players)
                 {
                     StatisticDetail sd = new StatisticDetail();
                     sd.Role = pl.GetType().Name;
-                    sd.Username = pl.Client.Username;     
+                    sd.Username = pl.Client.Username;
                     if (PlayerIsInWinnerString(pl, winners))
                     {
                         sd.Outcome = "Won";
-                    }else
+                    }
+                    else
                     {
                         sd.Outcome = "Lost";
                     }
@@ -498,21 +531,21 @@ namespace Business
                         gameSt.gameStatistic.Add(sd);
                 }
             }
-            if(!statistics.Contains(gameSt))
-            statistics.Add(gameSt);
+            if (!statistics.Contains(gameSt))
+                statistics.Add(gameSt);
             Store.SetStatistics(statistics);
         }
 
         private bool PlayerIsInWinnerString(Player pl, string winnerString)
         {
             string[] winners = winnerString.Split(',');
-            foreach(string username in winners)
+            foreach (string username in winners)
             {
                 if (username.Equals(pl.Client.Username, StringComparison.CurrentCultureIgnoreCase)) return true;
             }
             return false;
         }
-           
-            
-        }
+
+
+    }
 }
